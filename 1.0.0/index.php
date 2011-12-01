@@ -41,6 +41,23 @@
 		//set every field name values to NULL.
 	}
 	
+	// Get the contents of Yelp through Curl
+	$result = $db_admin->curl_download("http://www.yelp.com/c/sf/restaurants");
+	
+    if(preg_match_all("/<ol\sclass=\"hottest\snumeric([^\"]*)\">(.*)<\/ol>/siU", $result, $links))
+    {
+        foreach($links[0] as $link)
+        {
+            echo $link."<br />";    
+        }
+    }
+	
+	// First Item(picture)
+	if(preg_match_all("/<div\sclass=\"bizPhotoBox\sms([^\"]*)\">(.*)<\/div>/siU", $result, $links))
+    {
+      echo $links[0][0];
+    }
+	
 	$smarty->assign("PLUGIN_NAME", PLUGIN_NAME);
 	$smarty->assign("PG_BASE_PATH", $sPgDir);
 	$smarty->assign("server_base_url",SERVER_BASE_URL);

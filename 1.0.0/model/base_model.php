@@ -66,6 +66,18 @@
 			$sSql = "UPDATE ".$this->tbl_option." SET ".$tbl_option_values." WHERE pdm_idx = ".$this->getUserId();
 			$values = $this->query($sSql);
 	  }
+	  
+	  // Curl
+	  function curl_download($Url){
+			$curl = curl_init();
+			curl_setopt ($curl, CURLOPT_URL, $Url);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			
+			$result = curl_exec ($curl);
+			curl_close ($curl);
+			
+			return $result;
+	  }
   }
 	
 	
