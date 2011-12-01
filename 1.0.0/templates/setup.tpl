@@ -8,7 +8,7 @@
 			</div>			
 			<!-- // message box -->
 			
-			<h3 class="extension_plugin_name">Yelp</h3>
+			<h3 class="PG_{$PLUGIN_NAME}_PGname_title">Yelp</h3>
 			<h3>Settings</h3>
 			<p class="require"><span class="neccesary">*</span> Required</p>
 			<!-- input area -->			
@@ -20,9 +20,9 @@
 			</colgroup>
 			<tr>
 				<th>Category</th>
-				<td class="move">
+				<td class="PG_{$PLUGIN_NAME}_move">
 					<p><a href="#"><img src="images/u131_original.png" alt="" /></a><a href="#"><img src="images/u137_original.png" alt="" /></a></p>
-					<select title="select rows" class="rows menu" id="show_html_value" size="2">
+					<select title="select rows" class="rows PG_{$PLUGIN_NAME}_menu" id="show_html_value" size="2">
 						<option>Restaurants</option>
 						<option>Food</option>
 						<option>Nightlife</option>
@@ -56,32 +56,12 @@
 			</tr>
 			<tr>
 				<th>Template</th>
-				<td class="move">			
-					<script type="text/javascript">
-					//<![CDATA[
-						function image_list(){
-						var list = document.getElementById('image_list_wrap');
-						var upload = document.getElementById('image_upload_wrap'); 
-							if(list.style.display == 'none'){
-								list.style.display='';
-								upload.style.display='none';
-							}
-						}
-						function image_upload(){
-						var list = document.getElementById('image_list_wrap');
-						var upload = document.getElementById('image_upload_wrap'); 
-							if(upload.style.display == 'none'){
-								list.style.display='none';
-								upload.style.display='';
-							}
-						}
-					//]]>
-					</script>
+				<td class="PG_{$PLUGIN_NAME}_move">			
 					<!-- Select form The image List -->
 					<div id="image_list_wrap">	
 						<input type="radio" name="plugin_select_image" class="input_rdo" checked="checked" onclick="image_list()" /> <label class="lbl_rgt">Blue</label>
 						<input type="radio" name="plugin_select_image" class="input_rdo" checked="checked" onclick="image_list()" /> <label class="lbl_rgt">Gray</label>
-						<p class="image">
+						<p class="PG_{$PLUGIN_NAME}_image">
 							<img src="images/u128_original.png" alt="" />
 							<img src="images/u126_original.png" alt="" />
 						</p>						

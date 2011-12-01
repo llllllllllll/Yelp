@@ -16,7 +16,7 @@
 .plugin_select_image				{margin-top:15px}
 .plugin_select_image dt				{float:left;color:#444}
 .plugin_select_image dd				{margin:0 0 5px 125px}
-.plugin_select_image dd.image img		{border:1px solid #e0e0e0}
+.plugin_select_image dd.PG_Yelp_image img		{border:1px solid #e0e0e0}
 .plugin_select_image dd.fix_image img	{border:1px solid #e0e0e0}
 .plugin_select_image dd.fix_image img.delete {width:auto;height:auto;border:none;vertical-align:middle}
 .plugin_select_image .image_information {font-size:11px;color:#444}
@@ -43,7 +43,7 @@ input.no_border {border:0;}
 .table_header_area {margin-top:0;}
 
 /* other element settings */
-.menu {width:200px;height:120px;margin-top:3px;}
-.move {padding-left:10px !important;}
-.move img {margin-right:2px;}
-.image img {margin-right:33px;}
+.PG_Yelp_menu {width:200px;height:120px;margin-top:3px;}
+.PG_Yelp_move {padding-left:10px !important;}
+.PG_Yelp_move img {margin-right:2px;}
+.PG_Yelp_image img {margin-right:33px;}
