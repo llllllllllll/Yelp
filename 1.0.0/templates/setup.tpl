@@ -1,6 +1,7 @@
 {include file='header.tpl'}
 <body>
 {$sScriptCrossDomain}
+	<div id="PG_{$PLUGIN_NAME}_Setup_mainContainer">
 	<!-- message box -->			
 			<div class="msg_suc_box">
 				<p><span>Saved successfully.</span></p>
@@ -92,6 +93,7 @@
 				<a href="#" class="btn_apply" title="Save changes" onclick="chk_validate();">Save</a>
 				<a href="#" class="add_link" title="Reset to default">Reset to Default</a>
 			</div>
+	</div>
 </body>
 </html>
 

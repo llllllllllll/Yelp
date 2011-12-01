@@ -1,6 +1,8 @@
 {include file='header.tpl'}
 <body>
+	<div id="PG_{$PLUGIN_NAME}_Front_mainContainer">
 	<div id="pg_yelp">
+		
 		<h1>Yelp</h1>
 		<ul class="pg_yelp_nav">
 			<li><a href="#" class="on">Food</a></li>
@@ -87,6 +89,7 @@
 				</li>
 			</ul>
 		</div>
+	</div>
 	</div>
 	<span id="PG_{$PLUGIN_NAME}_PG_NAME" style="visibility: hidden">{$PLUGIN_NAME}</span>
 </body>
