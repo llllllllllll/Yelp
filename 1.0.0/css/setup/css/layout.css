@@ -30,7 +30,3 @@ ul.global_menu li	{float:left;}
 #middle_subpage	{margin:0 0 0 160px;padding:0 0 93px 20px;background:url(../images/bg_content_area.gif) left top repeat-y;}
 #middle_subpage:after	{content:"";clear:both;display:block;}
 
-/* popup */
-#popup_wrap {padding:15px}
-
-

@@ -3,7 +3,18 @@
   <title>Paypal Donate</title>
   <meta http-equiv="X-UA-Compatible" content="IE=8" >
   <link href="{$sPgDir}/css/front/yelp_front.css" rel="stylesheet" type="text/css" />
-  <link href="{$sPgDir}/css/setup.css" rel="stylesheet" type="text/css" media="screen" />	
+  <link href="{$sPgDir}/css/setup/yelp_setup.css" rel="stylesheet" type="text/css" media="screen" />
+  
+  <!--[if IE 7]>
+  <link href="css/ie7.css" rel="stylesheet" type="text/css" media="screen" />	
+  <![endif]-->
+  <!--[if lte IE 7]>
+  <link href="css/lte_ie7.css" rel="stylesheet" type="text/css" media="screen" />
+  <script defer type="text/javascript" language="Javascript" src="pngfix.js"></script>
+  <![endif]-->
+  <!--[if IE 6]>
+  <link href="css/ie6.css" rel="stylesheet" type="text/css" media="screen" />	
+  <![endif]-->
   
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="{$sPgDir}/js/paypaldonate_main.js"></script>
