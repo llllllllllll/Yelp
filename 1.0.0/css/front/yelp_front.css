@@ -23,7 +23,7 @@
 .PG_Yelp_contentnews li .PG_Yelp_content_desc a {color:#558de2;}
 .PG_Yelp_contentnews li  p a.PG_Yelp_more {float:right;margin-right:5px !important;font-size:10px;color:#558de2;text-decoration:none;font-family: Arial, Helvetica, sans-serif;background:url(../../images/pg_bbcnews_bullet2.jpg) no-repeat right 5px;padding-right:7px !important;}
 #top_biz_name_1{ color: #6666CC; }
-.star-img img{  background: none repeat scroll 0 0 transparent; border: 0 none; font-size: 100%; margin: 0; padding: 0; vertical-align: baseline !important;}
+.star-img img{ background-position:0px 0px }
 .stars_5{clip:rect(171px,83px,187px,0);top:-171px;}
 
 

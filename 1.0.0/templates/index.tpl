@@ -90,6 +90,6 @@
 		</div>
 	</div>
 	</div>
-	<span id="PG_{$PLUGIN_NAME}_PG_NAME" style="visibility: hidden">{$PLUGIN_NAME}</span>
+	<span id="PG_PG_NAME" style="visibility: hidden">{$PLUGIN_NAME}</span>
 </body>
 </html>

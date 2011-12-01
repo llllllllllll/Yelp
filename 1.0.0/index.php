@@ -46,10 +46,10 @@
 	
     if(preg_match_all("/<ol\sclass=\"hottest\snumeric([^\"]*)\">(.*)<\/ol>/siU", $result, $links))
     {
-        foreach($links[0] as $link)
-        {
-            echo $link."<br />";    
-        }
+      foreach($links[0] as $link)
+      {
+        echo $link."<br />";    
+      }
     }
 	
 	// First Item(picture)

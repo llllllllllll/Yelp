@@ -17,7 +17,7 @@
   <![endif]-->
   
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript" src="{$sPgDir}/js/paypaldonate_main.js"></script>
+	<script type="text/javascript" src="{$sPgDir}/js/yelp_main.js"></script>
   <script type="text/javascript" src="{$server_base_url}lib/js/common.js"></script>
 	<script type="text/javascript" src="{$server_base_url}lib/js/jquery.validate.js"></script>
   <script type="text/javascript" src="{$server_base_url}lib/js/popup.js"></script>
