@@ -1,0 +1,26 @@
+#pg_yelp *{margin:0;padding:0;} 
+#pg_yelp {background:url(../../images/pg_yelp_bg1.jpg) no-repeat;width:260px;height:350px;}
+#pg_yelp h1 {background:url(../../images/pg_yelp_bullet1.gif) no-repeat right;padding-right:10px;font-size:12px;color:#fff;font-family:tahoma, geneva, sans-serif;height:34px;font-weight:bold;line-height:34px;margin-left:12px;display:inline;}
+
+.pg_yelp_nav {margin:8px 0 0 9px !important;width:242px;display:inline-block;}
+.pg_yelp_nav li {float:left;display:inline-block;font-size:11px;height:22px;text-align:center;width:33%}
+.pg_yelp_nav li a {font-family: Arial, Helvetica, sans-serif;text-decoration:none;height:20px;width:100%;line-height:20px;display:inline-block;}
+.pg_yelp_nav li a.off {height:20px;line-height:20px;border:1px solid #e0e0e0;background:#ededed;display:inline-block;color:#999}
+.pg_yelp_nav li a.on {height:20px;line-height:20px;border:1px solid #e0e0e0;border-bottom:none !important;background:#fff;display:inline-block;color:#333;}
+.pg_yelp_nav li a:hover {background:#fff !important;color:#333;}
+
+.pg_yelp_content_wrap {width:248px;margin:13px 0 0 5px !important;overflow:hidden;}
+.pg_contentnews {overflow:auto;float:right;width:248px;height:262px;}
+
+.pg_contentnews li {float:left;width:230px;border-bottom:1px solid #e7e7e7;padding-bottom:10px !important;margin-bottom:10px !important;}
+.pg_contentnews li span img {float:left;margin-top:3px !important;margin-right:6px !important;width:9px;height:9px;}
+.pg_contentnews li .pg_content {width:210px;font-size:11px;float:left;color:#333;font-family: Arial, Helvetica, sans-serif;word-spacing:-1px}
+.pg_contentnews li .pg_content .pg_rating {padding-left:95px !important;background:url(../../images/pg_stars_map.png) no-repeat 0 -171px;height:15px;}
+.pg_contentnews li .pg_content .pg_toggle_content {margin-top:5px !important;}
+.pg_contentnews li .pg_content .pg_toggle_content img {float:left;margin:3px 10px 0 0 !important;border:1px solid #ccc;padding:1px !important;}
+.pg_contentnews li .pg_title {font-size:12px;font-weight:bold;color:#558de2;display:block;margin-bottom:2px !important;font-family: Arial, Helvetica, sans-serif;}
+.pg_contentnews li .pg_content_desc {font-size:10px;color:#999}
+.pg_contentnews li .pg_content_desc a {color:#558de2;}
+.pg_contentnews li  p a.pg_more {float:right;margin-right:5px !important;font-size:10px;color:#558de2;text-decoration:none;font-family: Arial, Helvetica, sans-serif;background:url(../../images/pg_bbcnews_bullet2.jpg) no-repeat right 5px;padding-right:7px !important;}
+
+

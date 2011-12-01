@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+#pg_directions_header h2 a {font-size:0.75em !important;}
+#pg_directions_header h2 {margin: 0 8px 0 0 !important;}
+#pg_directions_header {margin-bottom: 10px;}
+.first {top:135px;left:30px !important;}
+.second {top:135px;left:403px !important;}
+#pg_directions_header #directions a.btn_directions{margin-top:-5px !important; }
+

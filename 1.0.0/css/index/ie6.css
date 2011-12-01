@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+#pg_display_route_container {width:913px !important;padding-bottom:0 !important;}
+#pg_directions_header p {margin:-10px 0 10px 0 !important;}
+#pg_directions_header h2 a {font-size:2em !important;}	
+#pg_directions_header {margin-bottom:10px;}
+#pg_directions_header #directions .btn_width {width:95px !important;}
+.first {top:137px;left:21px !important;height:60px;}
+.second {top:137px;left:399px !important;height:60px;}	

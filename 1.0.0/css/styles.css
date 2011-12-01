@@ -1,0 +1,20 @@
+.break {font-size:0;width:0;height:0;clear:both;}
+img {border:0;}
+#pg_display_route_wrap * {margin:0;padding:0;} 
+#pg_display_route_wrap {background: url(../images/pg_map_bg2.gif) no-repeat top;width:260px;font-size:12px;display:inline-block;font-family: Arial, Helvetica, sans-serif; padding-top: 10px;}
+#pg_display_route_wrap .pg_display_route {background:url(../images/pg_map_bg2.gif) no-repeat bottom;padding-bottom:10px !important;width:260px;display:inline-block;text-align:center;}
+#pg_display_route_wrap h4 {font-size:12px;font-weight:12px;display:inline;color:#ffffff;height:34px;line-height:34px;background: no-repeat right;padding-left:10px;padding-right:10px;}
+
+.pg_display_route .pg_mapdiv {position:relative;}
+.pg_display_route .pg_mapdiv a img {margin-top:10px !important;}
+.pg_display_route .pg_map_link {margin-top:5px !important;}
+.pg_display_route .pg_map_link a {color:#568ee1;}
+.pg_display_route .pg_mapdiv .i {top:0;height:16px;width:16px;background:url("../images/ico_map.gif") no-repeat -999px -999px;display:inline-block;}
+.pg_display_route .pg_mapdiv #pg_zoom_in, .pg_display_route .pg_mapdiv #pg_zoom_out {position:absolute;left: 3px; top: 206px;z-index:3;cursor:pointer;}
+.pg_display_route .pg_mapdiv #pg_zoom_out { top: 228px; }
+.pg_display_route .pg_mapdiv .i-zoom-in, .pg_display_route .pg_mapdiv .i-zoom-out {height:23px;width:24px;background-position:0 -2620px;}
+.pg_display_route .pg_mapdiv .i-zoom-out {background-position:0 -2648px;}
+
+#pg_display_route_container {width: 700px;border: 1px solid #CCCCCC;padding: 0 10px;}
+
+

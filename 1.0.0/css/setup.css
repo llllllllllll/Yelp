@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+@import url("setup/common.css");
+@import url("setup/menu.css");
+@import url("setup/layout.css");
+@import url("setup/color.css");
+
+
+/* toggle option */
+.option_wrap {padding:5px 0 0 17px}
+/* calendar */
+.calendar		{position:relative;display:inline-block;vertical-align:top}
+.calendar img	{margin-top:2px;vertical-align:top}
+
+/* images select option */
+.plugin_select_image				{margin-top:15px}
+.plugin_select_image dt				{float:left;color:#444}
+.plugin_select_image dd				{margin:0 0 5px 125px}
+.plugin_select_image dd.image img		{border:1px solid #e0e0e0}
+.plugin_select_image dd.fix_image img	{border:1px solid #e0e0e0}
+.plugin_select_image dd.fix_image img.delete {width:auto;height:auto;border:none;vertical-align:middle}
+.plugin_select_image .image_information {font-size:11px;color:#444}
+/* images select option2: no title */
+.plugin_select_image2 dd {float:left;margin-right:15px;margin-bottom:15px;}
+.plugin_select_image2 img {vertical-align:middle;}
+/* images select option3 */
+ul.plugin_select_image3:after {content:"";clear:both;display:block;}
+.plugin_select_image3 li {float:left;margin:10px 10px 0 0;}
+.plugin_select_image3 img {vertical-align:middle;}
+/* images select optoin3> layer */
+.layer_normal ul.plugin_select_image3 {background:#fff;*zoom:1;}
+.layer_normal .plugin_select_image3 li {margin:10px;}
+
+/* order setting */
+.plugin_order_list .option_icon {vertical-align:middle;}
+
+/* form style */
+input.fix_100 {width:100px}
+input.fix_200 {width:200px} span.fix_200 {display:inline-block;width:205px;float:left;}
+input.no_border {border:0;}
+
+/* \*/
+* html  input {height:23px !important;}
+
+/* */
+
+/* reset for iframe */
+.table_header_area {margin-top:0;}
+
+.asterisk {margin-left:0 !important;width:485px;}
+.asterisk input {float:left;}
+.move {padding-left:10px !important;}
+.move img {margin-right:2px;}
+.image img {margin-right:33px;}
+.state {margin-right:18px;}
+.btn_apply{
+    background: url("../images/bg_btn_save.gif") repeat-x scroll 0 0 #000000;
+    border: medium none;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 4px 36px 5px 35px;
+    text-decoration: none !important;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+
+#PG_Paypaldonate_Setup_mainContainer input{ float: left; height: 20px; padding:1px 0 0 0;border:1px solid #ccc;color:#777;font-size:11px;font-family:verdana, arial, sans-serif; width: 25em;}
+#PG_Paypaldonate_Setup_mainContainer select{ float: left; }
+#PG_Paypaldonate_Cimgbtn{ margin-left: 5px; margin-right: 5px;}
+.imgPaypalStyle{ margin-top: 30px; display: block; }
+
+#PG_Paypaldonate_Front_mainContainer form { margin-top: 8px;}
+#PG_Paypaldonate_Front_mainContainer h3.widget-title { display: inline; }
