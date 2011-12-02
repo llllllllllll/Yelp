@@ -23,7 +23,7 @@ var defaults = { // Default values
 
 var Serverside = { // Deals with server side applications
   
-  curl: function(link)
+  curl: function(link) // Curl function
   {
     var getter  = defaults.getter();
     var data    = "url="+link;
@@ -51,16 +51,20 @@ var Serverside = { // Deals with server side applications
           
           // Reviews
           var new_review      = "<div class='PG_"+PG_name()+"_rating'>"+data["reviews"][json_counter]+"</div>";
-          var review_selector = "ul.PG_"+PG_name()+"_contentnews li:nth-child("+counter+") div.PG_"+
-                                PG_name()+"_content div.PG_"+
-                                PG_name()+"_rating"
+          var review_selector = "ul.PG_"+PG_name()+
+                                "_contentnews li:nth-child("+counter+") div.PG_"+PG_name()+
+                                "_content div.PG_"+PG_name()+"_rating";
           $(review_selector).replaceWith(new_review);
+          
+          // Business description
+          var new_busDesc      = data["bus_desc"][json_counter];
+          var busDesc_selector = "ul.PG_"+PG_name()+"_contentnews li:nth-child("+counter+") div.PG_"+
+                                PG_name()+"_content ol";
+          $(busDesc_selector+" li").remove();
+          $(busDesc_selector).html(new_busDesc); 
         }
-
       }
     });
-    
-
     
     // Image loader
     var loader  = "<div id='PG_Yelp_ajaxloader'>";

@@ -31,9 +31,13 @@
 	// Reviews
 	foreach($html->find("div[id=best-of-yelp] div[class=rating-wrap] em") as $element) 
 	  $review[] = $element->innertext;
-	
+	  
+	// Businness description
+	foreach($html->find("div[id=best-of-yelp] ol[id=business-description]") as $element) 
+	  $bus_desc[] = $element->innertext;
+	  
 	// Combine all data in one array for JSON
-	$data_arr = array("titles"=>$title, "reviews"=>$review);
+	$data_arr = array("titles"=>$title, "reviews"=>$review, "bus_desc"=>$bus_desc);
 
 	// Return data as json
 	echo json_encode($data_arr);
