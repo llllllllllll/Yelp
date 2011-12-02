@@ -28,21 +28,34 @@ var Serverside = { // Deals with server side applications
     var getter  = defaults.getter();
     var data    = "url="+link;
     
-    //$.ajax({
-    //  type: "POST",
-    //  url: getter,
-    //  data: data,
-    //  success: function(data){
-    //    alert(data);
-    //  }
-    //});
+    $.ajax({
+      type: "POST",
+      url: getter,
+      dataType: "json",
+      data: data,
+      success: function(data){
+        var p_count = $("ul.PG_"+PG_name()+"_contentnews li").length;
+
+        $("div#PG_"+PG_name()+"_ajaxloader").remove();
+        $("ul.PG_"+PG_name()+"_contentnews").show();
+        
+        for(counter=1;counter<=p_count;counter++)
+        {
+          var json_counter = counter - 1;
+          var new_title     = "<p class='PG_"+PG_name()+"_title'>"+data[json_counter]+"</p>";
+          $("ul.PG_"+PG_name()+"_contentnews li:nth-child("+counter+") div.PG_"+PG_name()+"_content p.PG_"+PG_name()+"_title").replaceWith(new_title);
+        }
+      }
+    });
+    
+
     
     // Image loader
     var loader  = "<div id='PG_Yelp_ajaxloader'>";
         loader += "<img src='"+defaults.basepath()+"/images/ajax-loader_yelp.gif'>";
         loader += "</div>";
         
-    $("ul.PG_"+PG_name()+"_contentnews").remove();
+    $("ul.PG_"+PG_name()+"_contentnews").hide();
     $("div#PG_"+PG_name()+"_ajaxloader").remove();
     $("div.PG_"+PG_name()+"_content_wrap").append(loader);
   }
