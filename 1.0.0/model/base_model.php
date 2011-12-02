@@ -68,7 +68,7 @@
 	  }
 	  
 	  // Curl
-	  function curl_download($Url){
+	  public function curl_download($Url){
 			$curl = curl_init();
 			curl_setopt ($curl, CURLOPT_URL, $Url);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -78,9 +78,35 @@
 			
 			return $result;
 	  }
+	  
+	  // Categories
+	  public function categories()
+	  {
+			$cat_array = array(
+				"Restaurants"					=> "http://www.yelp.com/c/sf/restaurants",
+				"Food"							=> "http://www.yelp.com/c/sf/food",
+				"Nightlife"						=> "http://www.yelp.com/c/sf/nightlife",
+				"Shopping"						=> "http://www.yelp.com/c/sf/shopping",
+				"Beauty and Spas"				=> "http://www.yelp.com/c/sf/beautysvc",
+				"Arts & Entertainment"			=> "http://www.yelp.com/c/sf/arts",
+				"Event Planning & Services"		=> "http://www.yelp.com/c/sf/eventservices",
+				"Active Life"					=> "http://www.yelp.com/c/sf/active",
+				"Health and Medical"			=> "http://www.yelp.com/c/sf/health",
+				"Hotels & Travel"				=> "http://www.yelp.com/c/sf/hotelstravel",
+				"Local Services"				=> "http://www.yelp.com/c/sf/localservices",
+				"Home Services"					=> "http://www.yelp.com/c/sf/homeservices",
+				"Automotive"					=> "http://www.yelp.com/c/sf/auto",
+				"Local Flavor"					=> "http://www.yelp.com/c/sf/localflavor",
+				"Pets"							=> "http://www.yelp.com/c/sf/pets",
+				"Public Services & Education"	=> "http://www.yelp.com/c/sf/publicservicesgovt",
+				"Professional Services"			=> "http://www.yelp.com/c/sf/professional",
+				"Real Estate"					=> "http://www.yelp.com/c/sf/realestate",
+				"Mass Media"					=> "http://www.yelp.com/c/sf/massmedia",
+				"Financial Services"			=> "http://www.yelp.com/c/sf/financialservices",
+				"Religious Organizations"		=> "http://www.yelp.com/c/sf/religiousorgs"
+			);
+			return $cat_array;
+	  }
+	  
   }
-	
-	
-	
-	
 	

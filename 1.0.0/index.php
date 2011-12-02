@@ -54,6 +54,7 @@
 	$smarty_row_count = $row_count + 1;
 	$smarty->assign("row_count", $smarty_row_count);
 	
+	// Title
 	for($x=1;$x<=$row_count;$x++)
 	{
 	  foreach($html->find("a[id=top_biz_name_".$x."]") as $element) 
@@ -63,6 +64,18 @@
 	{
 	  $smarty->assign($key, $value);
 	}
+	
+	// Categories
+	$categories		= $db_admin->categories();
+	$cat_count	= count($categories);
+	$cat_counter	= 1;
+	foreach($categories as $key=>$value)
+	{
+	  $smarty->assign("catrg_".$cat_counter, $key);
+	  $smarty->assign($key, $value);
+	  $cat_counter++;
+	}
+	$smarty->assign("catrg_count", $cat_count);
 	
 	
 	$smarty->assign("PLUGIN_NAME", PLUGIN_NAME);

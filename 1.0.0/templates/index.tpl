@@ -1,12 +1,18 @@
 {include file='header.tpl'}
 <body>
+	
 	<div id="PG_{$PLUGIN_NAME}_Front_mainContainer">
 	<div id="PG_{$PLUGIN_NAME}">
 		<h1>Yelp</h1>
 		<ul class="PG_{$PLUGIN_NAME}_nav">
-			<li><a href="#" class="on">Food</a></li>
-			<li><a href="#" class="off">Shopping</a></li>
-			<li><a href="#" class="off">Pets</a></li>
+			
+			{section name=x start=1 loop=4 step=1}
+				{if {$smarty.section.x.index} eq 1}
+					<li><a href="{${$catrg_{$smarty.section.x.index}}}" class="on">{$catrg_{$smarty.section.x.index}}</a></li>
+				{else}
+					<li><a href="{${$catrg_{$smarty.section.x.index}}}" class="off">{$catrg_{$smarty.section.x.index}}</a></li>
+				{/if}
+			{/section}
 		</ul>
 	
 		<div class="PG_{$PLUGIN_NAME}_content_wrap">
@@ -48,5 +54,6 @@
 	</div>
 	</div>
 	<span id="PG_PG_NAME" style="visibility: hidden">{$PLUGIN_NAME}</span>
+	<input type="hidden" name="PG_{$PLUGIN_NAME}_getter" id="PG_{$PLUGIN_NAME}_getter" value="{$getterPhp}" />
 </body>
 </html>
