@@ -42,9 +42,21 @@ var Serverside = { // Deals with server side applications
         for(counter=1;counter<=p_count;counter++)
         {
           var json_counter = counter - 1;
-          var new_title     = "<p class='PG_"+PG_name()+"_title'>"+data[json_counter]+"</p>";
-          $("ul.PG_"+PG_name()+"_contentnews li:nth-child("+counter+") div.PG_"+PG_name()+"_content p.PG_"+PG_name()+"_title").replaceWith(new_title);
+          // Title
+          var new_title       = "<p class='PG_"+PG_name()+"_title'>"+data["titles"][json_counter]+"</p>";
+          var title_selector  = "ul.PG_"+PG_name()+"_contentnews li:nth-child("+counter+") div.PG_"+
+                                PG_name()+"_content p.PG_"+
+                                PG_name()+"_title";
+          $(title_selector).replaceWith(new_title);
+          
+          // Reviews
+          var new_review      = "<div class='PG_"+PG_name()+"_rating'>"+data["reviews"][json_counter]+"</div>";
+          var review_selector = "ul.PG_"+PG_name()+"_contentnews li:nth-child("+counter+") div.PG_"+
+                                PG_name()+"_content div.PG_"+
+                                PG_name()+"_rating"
+          $(review_selector).replaceWith(new_review);
         }
+
       }
     });
     
@@ -64,7 +76,7 @@ var Serverside = { // Deals with server side applications
 
 jQuery(document).ready(function($){
   
-  // Front ---------------------------------------------------------------------
+  // Front ------------------------
   
   // Tab
   $("ul.PG_Yelp_nav li a").click(function(){

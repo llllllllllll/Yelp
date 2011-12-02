@@ -22,13 +22,19 @@
 	// Row count
 	$row_count = 5;
 	
-	// Title
 	for($x=1;$x<=$row_count;$x++)
 	{
+	  // Title
 	  foreach($html->find("a[id=top_biz_name_".$x."]") as $element) 
 		$title[] = $element->innertext;
 	}
+	// Reviews
+	foreach($html->find("div[id=best-of-yelp] div[class=rating-wrap] em") as $element) 
+	  $review[] = $element->innertext;
 	
+	// Combine all data in one array for JSON
+	$data_arr = array("titles"=>$title, "reviews"=>$review);
+
 	// Return data as json
-	echo json_encode($title);
+	echo json_encode($data_arr);
   }
