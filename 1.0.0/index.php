@@ -45,10 +45,16 @@
 	// Get the contents of Yelp through Curl
 	// Create a DOM object
 	$html = new simple_html_dom();
+	
 	// Load HTML from a URL 
 	$html->load_file('http://www.yelp.com/c/sf/restaurants');
 	
-	for($x=1;$x<=5;$x++)
+	// Row count
+	$row_count = 5;
+	$smarty_row_count = $row_count + 1;
+	$smarty->assign("row_count", $smarty_row_count);
+	
+	for($x=1;$x<=$row_count;$x++)
 	{
 	  foreach($html->find("a[id=top_biz_name_".$x."]") as $element) 
 		$title["title_".$x] = $element->innertext;
@@ -56,8 +62,8 @@
 	foreach($title as $key=>$value)
 	{
 	  $smarty->assign($key, $value);
-	  //echo $value."<br />";
 	}
+	
 	
 	$smarty->assign("PLUGIN_NAME", PLUGIN_NAME);
 	$smarty->assign("PG_BASE_PATH", $sPgDir);
