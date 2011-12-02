@@ -1,6 +1,7 @@
 <?php
   require_once("configs/core_conf.php");
   require_once("model/base_model.php");
+  require_once("libs/simple_html_dom.php");
   
   /*
 	| ----------------------------------
@@ -42,21 +43,21 @@
 	}
 	
 	// Get the contents of Yelp through Curl
-	$result = $db_admin->curl_download("http://www.yelp.com/c/sf/restaurants");
+	// Create a DOM object
+	$html = new simple_html_dom();
+	// Load HTML from a URL 
+	$html->load_file('http://www.yelp.com/c/sf/restaurants');
 	
-    if(preg_match_all("/<ol\sclass=\"hottest\snumeric([^\"]*)\">(.*)<\/ol>/siU", $result, $links))
-    {
-      foreach($links[0] as $link)
-      {
-        echo $link."<br />";    
-      }
-    }
-	
-	// First Item(picture)
-	if(preg_match_all("/<div\sclass=\"bizPhotoBox\sms([^\"]*)\">(.*)<\/div>/siU", $result, $links))
-    {
-      echo $links[0][0];
-    }
+	for($x=1;$x<=5;$x++)
+	{
+	  foreach($html->find("a[id=top_biz_name_".$x."]") as $element) 
+		$title["title_".$x] = $element->innertext;
+	}
+	foreach($title as $key=>$value)
+	{
+	  $smarty->assign($key, $value);
+	  //echo $value."<br />";
+	}
 	
 	$smarty->assign("PLUGIN_NAME", PLUGIN_NAME);
 	$smarty->assign("PG_BASE_PATH", $sPgDir);
