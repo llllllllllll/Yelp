@@ -14,10 +14,10 @@
   $html = new simple_html_dom();
 
   // Front
-  if(isset($_POST['url']))
-  {
+  //if(isset($_POST['url']))
+  //{
 	// Load HTML from a URL 
-	$html->load_file($_POST['url']);
+	$html->load_file("http://www.yelp.com/c/sf/food");
 	
 	// Row count
 	$row_count = 5;
@@ -36,9 +36,14 @@
 	foreach($html->find("div[id=best-of-yelp] ol[id=business-description]") as $element) 
 	  $bus_desc[] = $element->innertext;
 	  
+    // Picture of first item
+	//foreach($html->find("div[id=best-of-yelp] div[class=bizPhotoBox] img") as $element) 
+	//  $picture[] = $element->src;
+	  
 	// Combine all data in one array for JSON
-	$data_arr = array("titles"=>$title, "reviews"=>$review, "bus_desc"=>$bus_desc);
+	$data_arr = array("titles"=>$title, "reviews"=>$review, "bus_desc"=>$bus_desc, "pictures"=>$picture);
 
 	// Return data as json
 	echo json_encode($data_arr);
-  }
+	
+  //}
