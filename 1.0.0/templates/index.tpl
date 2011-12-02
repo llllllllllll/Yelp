@@ -55,5 +55,6 @@
 	</div>
 	<span id="PG_PG_NAME" style="visibility: hidden">{$PLUGIN_NAME}</span>
 	<input type="hidden" name="PG_{$PLUGIN_NAME}_getter" id="PG_{$PLUGIN_NAME}_getter" value="{$getterPhp}" />
+	<input type="hidden" name="PG_{$PLUGIN_NAME}_basepath" id="PG_{$PLUGIN_NAME}_basepath" value="{$PG_BASE_PATH}" />
 </body>
 </html>

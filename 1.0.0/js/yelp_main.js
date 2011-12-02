@@ -10,8 +10,14 @@ var PG_name = (function(){  // Plugin name
 var defaults = { // Default values
   getter: function()
   {
-    var getter_val = $("#PG_Yelp_getter").val();
+    var getter_val = $("#PG_"+PG_name()+"_getter").val();
     return getter_val;
+  },
+  
+  basepath: function()
+  {
+    var basepath_val = $("#PG_"+PG_name()+"_basepath").val();
+    return basepath_val;
   }
 }
 
@@ -22,14 +28,23 @@ var Serverside = { // Deals with server side applications
     var getter  = defaults.getter();
     var data    = "url="+link;
     
-    $.ajax({
-      type: "POST",
-      url: getter,
-      data: data,
-      success: function(data){
-        alert(data);
-      }
-    });
+    //$.ajax({
+    //  type: "POST",
+    //  url: getter,
+    //  data: data,
+    //  success: function(data){
+    //    alert(data);
+    //  }
+    //});
+    
+    // Image loader
+    var loader  = "<div id='PG_Yelp_ajaxloader'>";
+        loader += "<img src='"+defaults.basepath()+"/images/ajax-loader_yelp.gif'>";
+        loader += "</div>";
+        
+    $("ul.PG_"+PG_name()+"_contentnews").remove();
+    $("div#PG_"+PG_name()+"_ajaxloader").remove();
+    $("div.PG_"+PG_name()+"_content_wrap").append(loader);
   }
   
 }
