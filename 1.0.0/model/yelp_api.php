@@ -4,7 +4,7 @@
     {
         public function run($record_count)
         {
-            if($record_count < 0)
+            if($record_count > 0)
             {
                 //$unsigned_url = "http://api.yelp.com/v2/business/the-waterboy-sacramento";
                 $unsigned_url = "http://api.yelp.com/v2/search?category_filter=active&location=San+Francisco";

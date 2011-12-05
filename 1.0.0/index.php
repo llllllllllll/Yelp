@@ -15,7 +15,7 @@
 	| Initialize PG_Yelp_option value checker
 	| -----------------------------------------------
 	*/
-	$tbl_option_empty = $db_admin->count_settings();
+	$tbl_option_empty = $db_admin->count_settings("PG_Yelp_api_key");
 	$record_count = $tbl_option_empty[0]['settings_count'];
 	$smarty->assign("RECORD_COUNT", $record_count);
 	

@@ -30,17 +30,17 @@
 	  | --------------------
 	  */
 	  // PG_Paypaldonate_option count values
-	  public function count_settings()
+	  public function count_settings($table)
 	  {
-			$sSql = "SELECT COUNT(*) as settings_count FROM ".$this->tbl_option." WHERE pdm_idx = ".$this->getUserId();
+			$sSql = "SELECT COUNT(*) as settings_count FROM ".$table." WHERE pdm_idx = ".$this->getUserId();
 			$values = $this->query($sSql);
 			return $values;
 	  }
 		
 	  // Get PG_Paypaldonate_option values
-	  public function PG_Yelp_option_values()
+	  public function PG_Yelp_option_values($table)
 	  {
-			$sSql = "SELECT * FROM ".$this->tbl_option." WHERE pdm_idx = ".$this->getUserId();
+			$sSql = "SELECT * FROM ".$table." WHERE pdm_idx = ".$this->getUserId();
 			$values = $this->query($sSql, 'row');
 			return $values;
 	  }
@@ -51,10 +51,23 @@
 	  | Edit/Insert values
 	  | --------------------
 	  */
-	  // Insert option values
+	  // Insert API Keys
 	  public function insert_api_keys($api_key)
 	  {
-			$sSql = "INSERT INTO ".$this->tbl_api_key."
+			$count = $this->count_settings("PG_Yelp_api_key");
+			$api = $count[0]['settings_count'];
+			if($api > 0)
+			{
+				  $sSql = "UPDATE ".$this->tbl_api_key." SET
+						consumer_key 		= '".$api_key["consumer_key"]."',
+						consumer_secret		= '".$api_key["consumer_secret"]."',
+						token				= '".$api_key["token"]."',
+						token_secret		= '".$api_key["token_secret"]."'
+						WHERE pdm_idx 		= ".$this->getUserId();
+			}
+			else
+			{
+				  $sSql = "INSERT INTO ".$this->tbl_api_key."
 				  (pdm_idx,consumer_key,consumer_secret,token,token_secret)
 				  VALUES
 				  (
@@ -64,15 +77,23 @@
 				  '".$api_key["token"]."',
 				  '".$api_key["token_secret"]."'
 				  )";
+				  
+				  // Automatically insert default values for options
+				  $this->insert_newoptions();
+			}
 			$values = $this->query($sSql);
 	  }
-		
+	  
 	  // Update option values
-	  public function update_newoptions($tbl_option_values)
+	  public function insert_newoptions()
 	  {
-			$sSql = "UPDATE ".$this->tbl_option." SET ".$tbl_option_values." WHERE pdm_idx = ".$this->getUserId();
+			$sSql = "INSERT INTO ".$this->tbl_option."
+				  (pdm_idx,default_category,category,show_rows,template)
+				  VALUES
+				  (".$this->getUserId().",'general','Test Category',5,'blue')";
 			$values = $this->query($sSql);
 	  }
+	  
 	  
 	  // Curl
 	  public function curl_download($Url){

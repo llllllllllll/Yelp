@@ -16,10 +16,10 @@
 	| Initialize PG_Yelp_option value checker
 	| -----------------------------------------------
 	*/
-	$tbl_option_empty = $db_admin->count_settings();
+	$tbl_option_empty = $db_admin->count_settings("PG_Yelp_api_key");
 	$record_count = $tbl_option_empty[0]['settings_count'];
 	$smarty->assign("RECORD_COUNT", $record_count);
-	
+
 	/*
 	| -----------------------------------------------
 	| Validate PG_Yelp_option
@@ -30,13 +30,14 @@
 	*/
 	if($yelp_api->run($record_count) != false)
 	{
-		$option_values = $db_admin->PG_Yelp_option_values();
+		$option_values = $db_admin->PG_Yelp_option_values("PG_Yelp_option");
 		foreach($option_values as $key=>$value)
 		{
 			// assign field values to its key
 			$smarty->assign($key, $value);
 		}
 		
+		$smarty->assign("records_exist", "true");
 		//$response 	= $yelp_api->run($record_count);
 		//$bus_total 	= count($response["businesses"]);
 	}
