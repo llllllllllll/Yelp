@@ -2,7 +2,7 @@
 var PG_name = (function(){  // Plugin name
     return function()
     {
-      var pg_name = $("#PG_PG_NAME").text();
+      var pg_name = $("#PG_PG_NAME").val();
       return pg_name;
     }
 })();
@@ -102,7 +102,7 @@ jQuery(document).ready(function($){
   
   
   // Setup-------------------------
-  $("#PG_Paypaldonate_save").click(function(){
+  $("#PG_"+PG_name()+"_save").click(function(){
     // Save message
     $("#PG_"+PG_name()+"_successMsg").showMessage({
         type : "success",
@@ -111,6 +111,9 @@ jQuery(document).ready(function($){
           success : "Saved Successfully"
         }
     });
+    
+    // Prevent page from refreshing
+    return false;
   });
   
 });
