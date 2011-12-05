@@ -1,13 +1,15 @@
 <?php
 	require_once("configs/core_conf.php");
 	require_once("model/base_model.php");
+	require_once("model/yelp_api.php");
   
 	/*
 	| ----------------------------------
-	| Initialize main Yelp class
+	| Initialize main Yelp class and API
 	| ----------------------------------
 	*/
 	$db_admin = new PG_Yelp_db();
+	$yelp_api = new Yelp_api();
 	
 	/*
 	| -----------------------------------------------
@@ -17,7 +19,13 @@
 	$tbl_option_empty = $db_admin->count_settings();
 	$record_count = $tbl_option_empty[0]['settings_count'];
 	$smarty->assign("RECORD_COUNT", $record_count);
-
+	
+	if($yelp_api->run($record_count) != false)
+	{
+		$response 	= $yelp_api->run($record_count);
+		$bus_total 	= count($response["businesses"]);
+		echo "<h1>".$bus_total."</h1>";
+	}
 	/*
 	| -----------------------------------------------
 	| Validate PG_Yelp_option
@@ -39,9 +47,10 @@
 	{
 		// If PG_Yelp_option has no value,
 		// set every field name values to NULL.
+		$default_category = "general";
 		
+		$smarty->assign("default_category", $default_category);
 	}
-	
 	$smarty->assign("PLUGIN_NAME", PLUGIN_NAME);
 	$smarty->assign("PG_BASE_PATH", $sPgDir);
 	$smarty->assign("server_base_url",SERVER_BASE_URL);
