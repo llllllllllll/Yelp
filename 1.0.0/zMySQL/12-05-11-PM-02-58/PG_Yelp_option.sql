@@ -28,7 +28,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `PG_Yelp_option` (
   `yid` int(10) unsigned NOT NULL auto_increment,
   `pdm_idx` int(11) NOT NULL,
-  `category` varchar(50) NOT NULL,
+  `category` varchar(50) default NULL,
   `show_rows` int(10) unsigned NOT NULL,
   `template` varchar(50) default NULL,
   `consumer_key` varchar(50) NOT NULL,

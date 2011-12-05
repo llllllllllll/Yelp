@@ -23,7 +23,7 @@
       $sql = "CREATE TABLE IF NOT EXISTS ".$this->tbl_option." (
 			yid 			int(10) unsigned NOT NULL auto_increment PRIMARY KEY,
 			pdm_idx 		int(11) NOT NULL,
-			category 		varchar(50) NOT NULL,
+			category 		varchar(50) default NULL,
 			show_rows 		int(10) unsigned NOT NULL,
 			template 		varchar(50) default NULL,
 			consumer_key 	varchar(50) NOT NULL,
