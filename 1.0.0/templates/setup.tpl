@@ -18,8 +18,8 @@
 			<tr>
 				<th><label for="show_html_value">Shows Rows</label></th>
 				<td>
-					<input type="radio" class="fix" id="PG_{$PLUGIN_NAME}_def_general" name="PG_{$PLUGIN_NAME}_def_general" />General<br />
-					<input type="radio" class="fix" id="PG_{$PLUGIN_NAME}_def_specific" name="PG_{$PLUGIN_NAME}_def_general" />Specific	
+					<input type="radio" class="fix input_rdo" id="PG_{$PLUGIN_NAME}_def_general" name="PG_{$PLUGIN_NAME}_def_general" />General<br />
+					<input type="radio" class="fix input_rdo" id="PG_{$PLUGIN_NAME}_def_specific" name="PG_{$PLUGIN_NAME}_def_general" />Specific	
 				</td>
 			</tr>
 			<tr>
