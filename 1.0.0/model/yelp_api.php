@@ -4,8 +4,8 @@
     {
         public function run($record_count)
         {
-            //if($record_count < 0)
-            //{
+            if($record_count < 0)
+            {
                 //$unsigned_url = "http://api.yelp.com/v2/business/the-waterboy-sacramento";
                 $unsigned_url = "http://api.yelp.com/v2/search?category_filter=active&location=San+Francisco";
                 
@@ -42,11 +42,11 @@
                 
                 // Handle Yelp response data
                 $response   = json_decode($data, true);      
-            //}
-            //else
-            //{
-            //    $response = false;
-            //}
+            }
+            else
+            {
+                $response = false;
+            }
             return $response;
         }
         

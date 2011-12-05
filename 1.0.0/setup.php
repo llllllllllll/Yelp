@@ -20,12 +20,6 @@
 	$record_count = $tbl_option_empty[0]['settings_count'];
 	$smarty->assign("RECORD_COUNT", $record_count);
 	
-	if($yelp_api->run($record_count) != false)
-	{
-		$response 	= $yelp_api->run($record_count);
-		$bus_total 	= count($response["businesses"]);
-		echo "<h1>".$bus_total."</h1>";
-	}
 	/*
 	| -----------------------------------------------
 	| Validate PG_Yelp_option
@@ -34,7 +28,7 @@
 	| - Otherwise, assign field values to its key
 	| -----------------------------------------------
 	*/
-	if($record_count > 0)
+	if($yelp_api->run($record_count) != false)
 	{
 		$option_values = $db_admin->PG_Yelp_option_values();
 		foreach($option_values as $key=>$value)
@@ -42,6 +36,9 @@
 			// assign field values to its key
 			$smarty->assign($key, $value);
 		}
+		
+		//$response 	= $yelp_api->run($record_count);
+		//$bus_total 	= count($response["businesses"]);
 	}
 	else
 	{
@@ -50,7 +47,9 @@
 		$default_category = "general";
 		
 		$smarty->assign("default_category", $default_category);
+		$smarty->assign("records_exist", "false");
 	}
+	
 	$smarty->assign("PLUGIN_NAME", PLUGIN_NAME);
 	$smarty->assign("PG_BASE_PATH", $sPgDir);
 	$smarty->assign("server_base_url",SERVER_BASE_URL);

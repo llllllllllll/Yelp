@@ -18,6 +18,13 @@ var defaults = { // Default values
   {
     var basepath_val = $("#PG_"+PG_name()+"_basepath").val();
     return basepath_val;
+  },
+  
+  records_exist: function()
+  {
+    var records_exist = $("#PG_"+PG_name()+"_records_exist").val();
+    return records_exist;
+    //.css("disabled", "disabled");
   }
 }
 
@@ -102,6 +109,16 @@ jQuery(document).ready(function($){
   
   
   // Setup-------------------------
+  // Initial
+  // Check if there's an existing records
+  // in the database
+  if(defaults.records_exist() == "false")
+  {
+    // If there's non, disable some functionality settings
+    $("#PG_"+PG_name()+"_def_general").attr("disabled", true);
+    $("#PG_"+PG_name()+"_def_specific").attr("disabled", true);
+  }
+  
   $("#PG_"+PG_name()+"_save").click(function(){
     // Save message
     $("#PG_"+PG_name()+"_successMsg").showMessage({
