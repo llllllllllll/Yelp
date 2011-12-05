@@ -21,11 +21,15 @@
     function PG_Paypaldonate_option_install()
     {
       $sql = "CREATE TABLE IF NOT EXISTS ".$this->tbl_option." (
-			yid int(10) unsigned NOT NULL auto_increment PRIMARY KEY,
-			pdm_idx int(11) NOT NULL,
-			category varchar(50) NOT NULL,
-			show_rows int(10) unsigned NOT NULL,
-			template varchar(50) default NULL
+			yid 			int(10) unsigned NOT NULL auto_increment PRIMARY KEY,
+			pdm_idx 		int(11) NOT NULL,
+			category 		varchar(50) NOT NULL,
+			show_rows 		int(10) unsigned NOT NULL,
+			template 		varchar(50) default NULL,
+			consumer_key 	varchar(50) NOT NULL,
+			consumer_secret varchar(50) NOT NULL,
+			token 			varchar(50) NOT NULL,
+			token_secret 	varchar(50) NOT NULL
 		  ) ENGINE=InnoDB DEFAULT CHARSET=utf8
       ";
       $this->utilDb->query($sql);

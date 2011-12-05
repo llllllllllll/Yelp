@@ -6,6 +6,32 @@
 	<div id="PG_{$PLUGIN_NAME}_successMsg"></div>	
 			
 			<h3 class="PG_{$PLUGIN_NAME}_PGname_title">Yelp</h3>
+			<h3>API Key Settings</h3>
+			<p class="require"><span class="neccesary">*</span> Required</p>
+			<!-- input area -->			
+
+			<table border="1" cellspacing="0" class="table_input_vr">
+			<colgroup>
+				<col width="115px" />
+				<col width="*" />
+			</colgroup>
+			<tr>
+				<th>Consumer Key</th>
+				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_consumer_key" name="PG_{$PLUGIN_NAME}_API_consumer_key" class="fix" maxlength="255" style="width: 160px;" /></td>
+			</tr>
+			<tr>
+				<th>Consumer Secret</th>
+				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_consumer_secret" name="PG_{$PLUGIN_NAME}_API_consumer_secret" class="fix" maxlength="255" style="width: 160px;" /></td>
+			</tr>
+			<tr>
+				<th>Token</th>
+				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_token" name="PG_{$PLUGIN_NAME}_API_token" class="fix" maxlength="255" style="width: 160px;" /></td>
+			</tr>
+			<tr>
+				<th>Token Secret</th>
+				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_token_secret" name="PG_{$PLUGIN_NAME}_API_token_secret" class="fix" maxlength="255" style="width: 160px;" /></td>
+			</tr>
+			</table>
 			<h3>Settings</h3>
 			<p class="require"><span class="neccesary">*</span> Required</p>
 			<!-- input area -->			
