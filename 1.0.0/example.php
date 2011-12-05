@@ -93,6 +93,12 @@ for($x=0;$x<$bus_total;$x++)
 echo "<pre>";
 print_r($response);
 echo "</pre>";
+
+// Check if API Keys are invalid
+//if(isset($response->error))
+//{
+//    echo "API Keys are invalid";
+//}
 ?>
 
 

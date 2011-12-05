@@ -9,7 +9,8 @@
   class PG_Yelp_db  extends utilDb
   {
 	  protected $tbl_option 	= "PG_Yelp_option";
-	  protected $tbl_main 	= "PG_Yelp_main";
+	  protected $tbl_main 		= "PG_Yelp_main";
+	  protected $tbl_api_key 	= "PG_Yelp_api_key";
 		
 	  /*
 	  | --------------------
@@ -51,12 +52,18 @@
 	  | --------------------
 	  */
 	  // Insert option values
-	  public function insert_newoptions($tbl_option_values)
+	  public function insert_api_keys($api_key)
 	  {
-			$sSql = "INSERT INTO ".$this->tbl_option."
-				  (pdm_idx,category,show_rows,template)
+			$sSql = "INSERT INTO ".$this->tbl_api_key."
+				  (pdm_idx,consumer_key,consumer_secret,token,token_secret)
 				  VALUES
-				  ".$tbl_option_values;
+				  (
+				  ".$this->getUserId().",
+				  '".$api_key["consumer_key"]."',
+				  '".$api_key["consumer_secret"]."',
+				  '".$api_key["token"]."',
+				  '".$api_key["token_secret"]."'
+				  )";
 			$values = $this->query($sSql);
 	  }
 		

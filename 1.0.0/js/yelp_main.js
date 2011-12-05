@@ -30,57 +30,75 @@ var defaults = { // Default values
 
 var Serverside = { // Deals with server side applications
   
-  curl: function(link) // Curl function
+  save: function(api_keys) // Save 
   {
     var getter  = defaults.getter();
-    var data    = "url="+link;
-    
+    var data    = "consumer_key="+api_keys["consumer_key"]+"&";
+        data    += "consumer_secret="+api_keys["consumer_secret"]+"&";
+        data    += "token="+api_keys["token"]+"&";
+        data    += "token_secret="+api_keys["token_secret"];
+
     $.ajax({
       type: "POST",
       url: getter,
-      dataType: "json",
+      //dataType: "json",
       data: data,
       success: function(data){
-        var p_count = $("ul.PG_"+PG_name()+"_contentnews li").length;
-
-        $("div#PG_"+PG_name()+"_ajaxloader").remove();
-        $("ul.PG_"+PG_name()+"_contentnews").show();
-        
-        for(counter=1;counter<=p_count;counter++)
-        {
-          var json_counter = counter - 1;
-          // Title
-          var new_title       = "<p class='PG_"+PG_name()+"_title'>"+data["titles"][json_counter]+"</p>";
-          var title_selector  = "ul.PG_"+PG_name()+"_contentnews li:nth-child("+counter+") div.PG_"+
-                                PG_name()+"_content p.PG_"+
-                                PG_name()+"_title";
-          $(title_selector).replaceWith(new_title);
-          
-          // Reviews
-          var new_review      = "<div class='PG_"+PG_name()+"_rating'>"+data["reviews"][json_counter]+"</div>";
-          var review_selector = "ul.PG_"+PG_name()+
-                                "_contentnews li:nth-child("+counter+") div.PG_"+PG_name()+
-                                "_content div.PG_"+PG_name()+"_rating";
-          $(review_selector).replaceWith(new_review);
-          
-          // Business description
-          var new_busDesc      = data["bus_desc"][json_counter];
-          var busDesc_selector = "ul.PG_"+PG_name()+"_contentnews li:nth-child("+counter+") div.PG_"+
-                                PG_name()+"_content ol";
-          $(busDesc_selector+" li").remove();
-          $(busDesc_selector).html(new_busDesc); 
-        }
+        alert(data);
       }
     });
+
     
-    // Image loader
-    var loader  = "<div id='PG_Yelp_ajaxloader'>";
-        loader += "<img src='"+defaults.basepath()+"/images/ajax-loader_yelp.gif'>";
-        loader += "</div>";
-        
-    $("ul.PG_"+PG_name()+"_contentnews").hide();
-    $("div#PG_"+PG_name()+"_ajaxloader").remove();
-    $("div.PG_"+PG_name()+"_content_wrap").append(loader);
+    // TABS
+    //var getter  = defaults.getter();
+    //var data    = "url="+link;
+    //
+    //$.ajax({
+    //  type: "POST",
+    //  url: getter,
+    //  dataType: "json",
+    //  data: data,
+    //  success: function(data){
+    //    var p_count = $("ul.PG_"+PG_name()+"_contentnews li").length;
+    //
+    //    $("div#PG_"+PG_name()+"_ajaxloader").remove();
+    //    $("ul.PG_"+PG_name()+"_contentnews").show();
+    //    
+    //    for(counter=1;counter<=p_count;counter++)
+    //    {
+    //      var json_counter = counter - 1;
+    //      // Title
+    //      var new_title       = "<p class='PG_"+PG_name()+"_title'>"+data["titles"][json_counter]+"</p>";
+    //      var title_selector  = "ul.PG_"+PG_name()+"_contentnews li:nth-child("+counter+") div.PG_"+
+    //                            PG_name()+"_content p.PG_"+
+    //                            PG_name()+"_title";
+    //      $(title_selector).replaceWith(new_title);
+    //      
+    //      // Reviews
+    //      var new_review      = "<div class='PG_"+PG_name()+"_rating'>"+data["reviews"][json_counter]+"</div>";
+    //      var review_selector = "ul.PG_"+PG_name()+
+    //                            "_contentnews li:nth-child("+counter+") div.PG_"+PG_name()+
+    //                            "_content div.PG_"+PG_name()+"_rating";
+    //      $(review_selector).replaceWith(new_review);
+    //      
+    //      // Business description
+    //      var new_busDesc      = data["bus_desc"][json_counter];
+    //      var busDesc_selector = "ul.PG_"+PG_name()+"_contentnews li:nth-child("+counter+") div.PG_"+
+    //                            PG_name()+"_content ol";
+    //      $(busDesc_selector+" li").remove();
+    //      $(busDesc_selector).html(new_busDesc); 
+    //    }
+    //  }
+    //});
+    //
+    //// Image loader
+    //var loader  = "<div id='PG_Yelp_ajaxloader'>";
+    //    loader += "<img src='"+defaults.basepath()+"/images/ajax-loader_yelp.gif'>";
+    //    loader += "</div>";
+    //    
+    //$("ul.PG_"+PG_name()+"_contentnews").hide();
+    //$("div#PG_"+PG_name()+"_ajaxloader").remove();
+    //$("div.PG_"+PG_name()+"_content_wrap").append(loader);
   }
   
 }
@@ -128,9 +146,25 @@ jQuery(document).ready(function($){
     $("#PG_"+PG_name()+"_template_gray").attr("disabled", true);
   }
   
-  
+  // Save
   $("#PG_"+PG_name()+"_save").click(function(){
-    // Save message
+    var api_consumer_key    = $.trim($("#PG_"+PG_name()+"_API_consumer_key").val());
+    var api_consumer_secret = $.trim($("#PG_"+PG_name()+"_API_consumer_secret").val());
+    var api_token           = $.trim($("#PG_"+PG_name()+"_API_token").val());
+    var api_token_secret    = $.trim($("#PG_"+PG_name()+"_API_token_secret").val());
+
+    // Put array keys in array so that save could have only one parameter    
+    var api_keys = new Array();
+    api_keys["consumer_key"]    = api_consumer_key;
+    api_keys["consumer_secret"] = api_consumer_secret;
+    api_keys["token"]           = api_token;
+    api_keys["token_secret"]    = api_token_secret;
+    
+    // Save API Keys
+    Serverside.save(api_keys);
+    
+    
+    // Save message if success
     $("#PG_"+PG_name()+"_successMsg").showMessage({
         type : "success",
         resize : "#PG_"+PG_name()+"_Setup_mainContainer",
