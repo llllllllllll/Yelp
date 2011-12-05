@@ -2,11 +2,8 @@
 <body>
 {$sScriptCrossDomain}
 	<div id="PG_{$PLUGIN_NAME}_Setup_mainContainer">
-	<!-- message box -->			
-			<div class="msg_suc_box">
-				<p><span>Saved successfully.</span></p>
-			</div>			
-			<!-- // message box -->
+	<!-- message box -->
+	<div id="PG_{$PLUGIN_NAME}_successMsg"></div>	
 			
 			<h3 class="PG_{$PLUGIN_NAME}_PGname_title">Yelp</h3>
 			<h3>Settings</h3>

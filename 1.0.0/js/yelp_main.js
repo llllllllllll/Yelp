@@ -100,20 +100,20 @@ jQuery(document).ready(function($){
     return false; 
   });
   
+  
+  // Setup-------------------------
+  $("#PG_Paypaldonate_save").click(function(){
+    // Save message
+    $("#PG_"+PG_name()+"_successMsg").showMessage({
+        type : "success",
+        resize : "#PG_"+PG_name()+"_Setup_mainContainer",
+        message : {
+          success : "Saved Successfully"
+        }
+    });
+  });
+  
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
