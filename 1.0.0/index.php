@@ -29,8 +29,8 @@
 	*/
 	if($record_count > 0)
 	{
-		$option_values = $db_admin->PG_Yelp_option_values();
-		foreach($option_values as $key=>$value)
+		$api_key_values = $db_admin->PG_Yelp_values();
+		foreach($api_key_values as $key=>$value)
 		{
 			// assign field values to its key
 			$smarty->assign($key, $value);

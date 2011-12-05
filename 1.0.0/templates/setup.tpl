@@ -17,19 +17,19 @@
 			</colgroup>
 			<tr>
 				<th>Consumer Key</th>
-				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_consumer_key" name="PG_{$PLUGIN_NAME}_API_consumer_key" class="fix" maxlength="255" style="width: 160px;" /></td>
+				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_consumer_key" name="PG_{$PLUGIN_NAME}_API_consumer_key" class="fix" maxlength="255" style="width: 160px;" {if $records_exist eq 'true'}value="{$consumer_key}"{/if} /></td>
 			</tr>
 			<tr>
 				<th>Consumer Secret</th>
-				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_consumer_secret" name="PG_{$PLUGIN_NAME}_API_consumer_secret" class="fix" maxlength="255" style="width: 160px;" /></td>
+				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_consumer_secret" name="PG_{$PLUGIN_NAME}_API_consumer_secret" class="fix" maxlength="255" style="width: 160px;" {if $records_exist eq 'true'}value="{$consumer_secret}"{/if} /></td>
 			</tr>
 			<tr>
 				<th>Token</th>
-				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_token" name="PG_{$PLUGIN_NAME}_API_token" class="fix" maxlength="255" style="width: 160px;" /></td>
+				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_token" name="PG_{$PLUGIN_NAME}_API_token" class="fix" maxlength="255" style="width: 160px;" {if $records_exist eq 'true'}value="{$token}"{/if} /></td>
 			</tr>
 			<tr>
 				<th>Token Secret</th>
-				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_token_secret" name="PG_{$PLUGIN_NAME}_API_token_secret" class="fix" maxlength="255" style="width: 160px;" /></td>
+				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_token_secret" name="PG_{$PLUGIN_NAME}_API_token_secret" class="fix" maxlength="255" style="width: 160px;" {if $records_exist eq 'true'}value="{$token_secret}"{/if} /></td>
 			</tr>
 			</table>
 			<h3>Settings</h3>

@@ -30,7 +30,16 @@
 	*/
 	if($yelp_api->run($record_count) != false)
 	{
-		$option_values = $db_admin->PG_Yelp_option_values("PG_Yelp_option");
+		// API Key table
+		$api_key_values = $db_admin->PG_Yelp_values("PG_Yelp_api_key");
+		foreach($api_key_values as $key=>$value)
+		{
+			// assign field values to its key
+			$smarty->assign($key, $value);
+		}
+		
+		// Yelp option table
+		$option_values = $db_admin->PG_Yelp_values("PG_Yelp_option");
 		foreach($option_values as $key=>$value)
 		{
 			// assign field values to its key

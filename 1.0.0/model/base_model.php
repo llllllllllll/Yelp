@@ -38,7 +38,7 @@
 	  }
 		
 	  // Get PG_Paypaldonate_option values
-	  public function PG_Yelp_option_values($table)
+	  public function PG_Yelp_values($table)
 	  {
 			$sSql = "SELECT * FROM ".$table." WHERE pdm_idx = ".$this->getUserId();
 			$values = $this->query($sSql, 'row');
