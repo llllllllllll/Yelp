@@ -115,9 +115,19 @@ jQuery(document).ready(function($){
   if(defaults.records_exist() == "false")
   {
     // If there's non, disable some functionality settings
+
+    // Default Categories
     $("#PG_"+PG_name()+"_def_general").attr("disabled", true);
     $("#PG_"+PG_name()+"_def_specific").attr("disabled", true);
+    // Empty Category list
+    $("#show_html_value").empty();
+    // Disable Show Rows
+    $("#PG_"+PG_name()+"_rows").attr("disabled", true);
+    // Disable template option
+    $("#PG_"+PG_name()+"_template_blue").attr("disabled", true);
+    $("#PG_"+PG_name()+"_template_gray").attr("disabled", true);
   }
+  
   
   $("#PG_"+PG_name()+"_save").click(function(){
     // Save message
