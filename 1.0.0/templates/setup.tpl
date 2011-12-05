@@ -16,6 +16,13 @@
 				<col width="*" />
 			</colgroup>
 			<tr>
+				<th><label for="show_html_value">Shows Rows</label></th>
+				<td>
+					<input type="radio" class="fix" id="PG_{$PLUGIN_NAME}_def_general" name="PG_{$PLUGIN_NAME}_def_general" />General<br />
+					<input type="radio" class="fix" id="PG_{$PLUGIN_NAME}_def_specific" name="PG_{$PLUGIN_NAME}_def_general" />Specific	
+				</td>
+			</tr>
+			<tr>
 				<th>Category</th>
 				<td class="PG_{$PLUGIN_NAME}_move">
 					<p><a href="#"><img src="images/u131_original.png" alt="" /></a><a href="#"><img src="images/u137_original.png" alt="" /></a></p>
