@@ -27,6 +27,7 @@
 			pdm_idx 		int(11) NOT NULL,
 			default_category varchar(50) default NULL,
 			category 		text default NULL,
+			total_category	int unsigned NOT NULL,
 			show_rows 		int(10) unsigned NOT NULL,
 			template 		varchar(50) default NULL
 		  ) ENGINE=InnoDB DEFAULT CHARSET=utf8

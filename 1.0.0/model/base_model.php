@@ -73,10 +73,23 @@
 	  // Insert option values
 	  public function insert_newoptions()
 	  {
+			$init_categories 	= $this->categories();
+			$default_row_count	= count($init_categories);
+			$counter 			= 1;
+			$categories			= "";
+			foreach($init_categories as $key=>$values)
+			{
+				  if($counter < $default_row_count)
+						$categories .= $key.",";
+				  else
+						$categories .= $key;
+				  $counter++;
+			}
 			$sSql = "INSERT INTO ".$this->tbl_option."
-				  (pdm_idx,default_category,category,show_rows,template)
+				  (pdm_idx,default_category,category,total_category,show_rows,template)
 				  VALUES
-				  (".$this->getUserId().",'general','Restaurants,Food,Nightlife',5,'blue')";
+				  (".$this->getUserId().",'general','".$categories."',".$default_row_count.",5,'blue')";
+				  
 			$values = $this->query($sSql);
 	  }
 	  

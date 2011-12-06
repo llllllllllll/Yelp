@@ -46,6 +46,15 @@
 			$smarty->assign($key, $value);
 		}
 		
+		// Get each categories
+		$total_category = $option_values["total_category"];
+		$category 		= $option_values["category"];
+		$slice_ctgry = explode(",", $category);
+		for($x=0;$x<$total_category;$x++)
+		{
+			$smarty->assign("ctrgy_".$x, $slice_ctgry[$x]);
+		}
+		$smarty->assign("total_category", $total_category);
 		$smarty->assign("records_exist", "true");
 		//$response 	= $yelp_api->run($record_count);
 		//$bus_total 	= count($response["businesses"]);

@@ -241,6 +241,10 @@ jQuery(document).ready(function($){
     }
   });
   
+  // Get the total rows of categories
+  var CATGRY_LEN    = $("#show_html_value option").length;
+  
+  
   
 });
 

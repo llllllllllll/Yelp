@@ -53,27 +53,9 @@
 				<td class="PG_{$PLUGIN_NAME}_move">
 					<p><a href="#"><img class="PG_{$PLUGIN_NAME}_move" src="images/u131_original.png" alt="Up" /></a><a href="#"><img class="PG_{$PLUGIN_NAME}_move" src="images/u137_original.png" alt="Down" /></a></p>
 					<select title="select rows" class="rows PG_{$PLUGIN_NAME}_menu" id="show_html_value" size="2">
-						<option>Restaurants</option>
-						<option>Food</option>
-						<option>Nightlife</option>
-						<option>Shopping</option>
-						<option>Beauty and Spas</option>
-						<option>Arts and Entertainment</option>
-						<option>Active Life</option>
-						<option>Health and Medical</option>
-						<option>Hotels and Travel</option>
-						<option>Local Services</option>
-						<option>Home Services</option>
-						<option>Automotive</option>
-						<option>Local Flavor</option>
-						<option>Pets</option>
-						<option>Public Services and Government</option>
-						<option>Education</option>
-						<option>Professional Services</option>
-						<option>Real Estate</option>
-						<option>Mass Media</option>
-						<option>Financial Services</option>
-						<option>Religious Organizations</option>
+						{section name=x start=0 loop={$total_category} step=1}
+							<option>{$ctrgy_{$smarty.section.x.index}}</option>
+						{/section}
 					</select>
 					<p>The category displayed up to 3 on front.</p>
 				</td>
