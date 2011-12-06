@@ -54,9 +54,11 @@
 	{
 		// If PG_Yelp_option has no value,
 		// set every field name values to NULL.
-		$default_category = "general";
+		$default_category 	= "general";
+		$template			= "blue";
 		
 		$smarty->assign("default_category", $default_category);
+		$smarty->assign("template", $template);
 		$smarty->assign("records_exist", "false");
 	}
 	

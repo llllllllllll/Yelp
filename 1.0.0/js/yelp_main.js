@@ -32,23 +32,80 @@ var Serverside = { // Deals with server side applications
   
   save: function(api_keys) // Save 
   {
+    if(defaults.records_exist() == "false")
+    {
+      // If there's no record on both api and option tables,
+      // get only the values from api settings, other options
+      // records will be inserted from a default values. 
+      var data    = "consumer_key="+api_keys["consumer_key"]+"&";
+          data    += "consumer_secret="+api_keys["consumer_secret"]+"&";
+          data    += "token="+api_keys["token"]+"&";
+          data    += "token_secret="+api_keys["token_secret"]+"&";
+          data    += "save_type=insert";
+    }
+    else
+    {
+      // If there's an existing  records in api
+      // table, get the values in setup.php api
+      // settings, and other options.
+      
+      // Get the top 3 categories
+      var catgry_len    = $("#show_html_value option").length;
+      var catgry_arr    = new Array();
+      for(x=1;x<4;x++)
+      {
+        var catgry_vals = $("#show_html_value option:nth-child("+x+")").val();
+        catgry_arr["catgry_"+x]    = catgry_vals;
+      }
+      // Get the default category
+      var def_catgry    = $("input[name=PG_"+PG_name()+"_def_category]:checked").val();
+      // Get the default rows
+      var def_rows      = $("#PG_"+PG_name()+"_rows").val();
+      // Get the default template
+      var def_template  = $("input[name=PG_"+PG_name()+"_template_color]:checked").val();
+      
+      // API Keys
+      var data    = "consumer_key="+api_keys["consumer_key"]+"&";
+          data    += "consumer_secret="+api_keys["consumer_secret"]+"&";
+          data    += "token="+api_keys["token"]+"&";
+          data    += "token_secret="+api_keys["token_secret"]+"&";
+      // Default categories
+          data    += "default_category="+def_catgry+"&";
+      // Categories
+          data    += "catgry_1="+catgry_arr["catgry_1"]+"&";
+          data    += "catgry_2="+catgry_arr["catgry_2"]+"&";
+          data    += "catgry_3="+catgry_arr["catgry_3"]+"&";
+      // Default rows
+          data    += "show_rows="+def_rows+"&";
+      // Default template
+          data    += "template="+def_template+"&";
+          data    += "save_type=update";
+    }
     var getter  = defaults.getter();
-    var data    = "consumer_key="+api_keys["consumer_key"]+"&";
-        data    += "consumer_secret="+api_keys["consumer_secret"]+"&";
-        data    += "token="+api_keys["token"]+"&";
-        data    += "token_secret="+api_keys["token_secret"];
 
     $.ajax({
-      type: "POST",
-      url: getter,
-      //dataType: "json",
-      data: data,
-      success: function(data){
-        alert(data);
-      }
+        type: "POST",
+        url: getter,
+        data: data,
+        success: function(data){
+          if(data == "")
+          {
+            // Save message if success
+            $("#PG_"+PG_name()+"_successMsg").showMessage({
+                type : "success",
+                resize : "#PG_"+PG_name()+"_Setup_mainContainer",
+                message : {
+                  success : "Saved Successfully"
+                }
+            });
+          }
+          else
+          {
+            alert("[ERROR]: Settings are not saved.\n"+data);
+          }
+        }
     });
 
-    
     // TABS
     //var getter  = defaults.getter();
     //var data    = "url="+link;
@@ -163,26 +220,11 @@ jQuery(document).ready(function($){
     // Save API Keys
     Serverside.save(api_keys);
     
-    
-    // Save message if success
-    $("#PG_"+PG_name()+"_successMsg").showMessage({
-        type : "success",
-        resize : "#PG_"+PG_name()+"_Setup_mainContainer",
-        message : {
-          success : "Saved Successfully"
-        }
-    });
-    
     // Prevent page from refreshing
     return false;
   });
   
-  // Get the top 3 categories
-  var catgry_len = $("#show_html_value option").length;
-  for(x=1;x<4;x++)
-  {
-    var catgry_vals = $("#show_html_value option:nth-child("+x+")").val();
-  }
+  
   
 });
 

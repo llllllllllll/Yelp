@@ -54,20 +54,7 @@
 	  // Insert API Keys
 	  public function insert_api_keys($api_key)
 	  {
-			$count = $this->count_settings("PG_Yelp_api_key");
-			$api = $count[0]['settings_count'];
-			if($api > 0)
-			{
-				  $sSql = "UPDATE ".$this->tbl_api_key." SET
-						consumer_key 		= '".$api_key["consumer_key"]."',
-						consumer_secret		= '".$api_key["consumer_secret"]."',
-						token				= '".$api_key["token"]."',
-						token_secret		= '".$api_key["token_secret"]."'
-						WHERE pdm_idx 		= ".$this->getUserId();
-			}
-			else
-			{
-				  $sSql = "INSERT INTO ".$this->tbl_api_key."
+			$sSql = "INSERT INTO ".$this->tbl_api_key."
 				  (pdm_idx,consumer_key,consumer_secret,token,token_secret)
 				  VALUES
 				  (
@@ -77,34 +64,44 @@
 				  '".$api_key["token"]."',
 				  '".$api_key["token_secret"]."'
 				  )";
-				  
-				  // Automatically insert default values for options
-				  $this->insert_newoptions();
-			}
 			$values = $this->query($sSql);
+			
+			// Automatically insert default values for options
+			$this->insert_newoptions();
 	  }
 	  
-	  // Update option values
+	  // Insert option values
 	  public function insert_newoptions()
 	  {
 			$sSql = "INSERT INTO ".$this->tbl_option."
 				  (pdm_idx,default_category,category,show_rows,template)
 				  VALUES
-				  (".$this->getUserId().",'general','Test Category',5,'blue')";
+				  (".$this->getUserId().",'general','Restaurants,Food,Nightlife',5,'blue')";
 			$values = $this->query($sSql);
 	  }
 	  
+	  // Update API Keys
+	  public function update_api_keys($api_key)
+	  {
+			$sSql = "UPDATE ".$this->tbl_api_key." SET
+				  consumer_key 		= '".$api_key["consumer_key"]."',
+				  consumer_secret		= '".$api_key["consumer_secret"]."',
+				  token				= '".$api_key["token"]."',
+				  token_secret		= '".$api_key["token_secret"]."'
+				  WHERE pdm_idx 		= ".$this->getUserId();
+			$values = $this->query($sSql);
+	  }
 	  
-	  // Curl
-	  public function curl_download($Url){
-			$curl = curl_init();
-			curl_setopt ($curl, CURLOPT_URL, $Url);
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-			
-			$result = curl_exec ($curl);
-			curl_close ($curl);
-			
-			return $result;
+	  // Update other setting values
+	  public function update_options($values)
+	  {
+			$sSql = "UPDATE ".$this->tbl_option." SET
+				  default_category 		= '".$values["default_category"]."',
+				  category				= '".$values["category"]."',
+				  show_rows				= '".$values["show_rows"]."',
+				  template				= '".$values["template"]."'
+				  WHERE pdm_idx 		= ".$this->getUserId();
+			$values = $this->query($sSql);
 	  }
 	  
 	  // Categories

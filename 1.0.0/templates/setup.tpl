@@ -44,8 +44,8 @@
 			<tr>
 				<th><label for="show_html_value">Default Categories</label></th>
 				<td>
-					<input type="radio" class="fix input_rdo" id="PG_{$PLUGIN_NAME}_def_general" name="PG_{$PLUGIN_NAME}_def_general" {if $default_category eq 'general'}checked="checked"{/if} />General<br />
-					<input type="radio" class="fix input_rdo" id="PG_{$PLUGIN_NAME}_def_specific" name="PG_{$PLUGIN_NAME}_def_general" {if $default_category eq 'specific'}checked="checked"{/if} />Specific	
+					<input type="radio" class="fix input_rdo" id="PG_{$PLUGIN_NAME}_def_general" name="PG_{$PLUGIN_NAME}_def_category" value="general" {if $default_category eq 'general'}checked="checked"{/if} />General<br />
+					<input type="radio" class="fix input_rdo" id="PG_{$PLUGIN_NAME}_def_specific" name="PG_{$PLUGIN_NAME}_def_category" value="specific" {if $default_category eq 'specific'}checked="checked"{/if} />Specific	
 				</td>
 			</tr>
 			<tr>
@@ -89,8 +89,8 @@
 				<td class="PG_{$PLUGIN_NAME}_move">			
 					<!-- Select form The image List -->
 					<div id="image_list_wrap">	
-						<input type="radio" name="PG_{$PLUGIN_NAME}_template_blue" class="input_rdo" id="PG_{$PLUGIN_NAME}_template_blue" {if $template eq 'blue'}checked="checked"{/if} /> <label class="lbl_rgt">Blue</label>
-						<input type="radio" name="PG_{$PLUGIN_NAME}_template_gray" class="input_rdo" id="PG_{$PLUGIN_NAME}_template_gray" {if $template eq 'gray'}checked="checked"{/if} /> <label class="lbl_rgt">Gray</label>
+						<input type="radio" name="PG_{$PLUGIN_NAME}_template_color" class="input_rdo" id="PG_{$PLUGIN_NAME}_template_blue" value="blue" {if $template eq 'blue'}checked="checked"{/if} /> <label class="lbl_rgt">Blue</label>
+						<input type="radio" name="PG_{$PLUGIN_NAME}_template_color" class="input_rdo" id="PG_{$PLUGIN_NAME}_template_gray" value="gray" {if $template eq 'gray'}checked="checked"{/if} /> <label class="lbl_rgt">Gray</label>
 						<p class="PG_{$PLUGIN_NAME}_image">
 							<img src="images/u128_original.png" alt="" />
 							<img src="images/u126_original.png" alt="" />
