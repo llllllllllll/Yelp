@@ -6,32 +6,33 @@
         {
             if($record_count > 0)
             {
-                //$unsigned_url = "http://api.yelp.com/v2/business/the-waterboy-sacramento";
-                $unsigned_url = "http://api.yelp.com/v2/search?term=yelp&location=sf";
+                // GENERAL CATEGORY
+                $unsigned_url       = "http://api.yelp.com/v2/search?term=yelp&location=sf";
+                $values             = $this->PG_Yelp_values("PG_Yelp_api_key");
                 
                 // Set your keys here
-                $consumer_key = "uQbfJjWPd4VX1J1ayguJ_w";
-                $consumer_secret = "uIqxXXiotaKJsw2BLmt7oZIYJNQ";
-                $token = "-QxdkEGi9p38ENzsnwAUarLB-XeNzUa9";
-                $token_secret = "y9EZvZAo366T82Rf5HD1_y2Kkuo";
+                $consumer_key       = $values["consumer_key"];
+                $consumer_secret    = $values["consumer_secret"];
+                $token              = $values["token"];
+                $token_secret       = $values["token_secret"];
                 
                 // Token object built using the OAuth library
-                $token = new OAuthToken($token, $token_secret);
+                $token              = new OAuthToken($token, $token_secret);
                 
                 // Consumer object built using the OAuth library
-                $consumer = new OAuthConsumer($consumer_key, $consumer_secret);
+                $consumer           = new OAuthConsumer($consumer_key, $consumer_secret);
                 
                 // Yelp uses HMAC SHA1 encoding
-                $signature_method = new OAuthSignatureMethod_HMAC_SHA1();
+                $signature_method   = new OAuthSignatureMethod_HMAC_SHA1();
                 
                 // Build OAuth Request using the OAuth PHP library. Uses the consumer and token object created above.
-                $oauthrequest = OAuthRequest::from_consumer_and_token($consumer, $token, 'GET', $unsigned_url);
+                $oauthrequest       = OAuthRequest::from_consumer_and_token($consumer, $token, 'GET', $unsigned_url);
                 
                 // Sign the request
                 $oauthrequest->sign_request($signature_method, $consumer, $token);
                 
                 // Get the signed URL
-                $signed_url = $oauthrequest->to_url();
+                $signed_url         = $oauthrequest->to_url();
                 
                 // Send Yelp API Call
                 $ch = curl_init($signed_url);
@@ -41,11 +42,11 @@
                 curl_close($ch);
                 
                 // Handle Yelp response data
-                $response   = json_decode($data, true);      
+                $response           = json_decode($data, true);      
             }
             else
             {
-                $response = false;
+                $response           = false;
             }
             return $response;
         }
