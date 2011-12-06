@@ -177,7 +177,23 @@ jQuery(document).ready(function($){
     return false;
   });
   
+  // Get the top 3 categories
+  var catgry_len = $("#show_html_value option").length;
+  for(x=1;x<4;x++)
+  {
+    var catgry_vals = $("#show_html_value option:nth-child("+x+")").val();
+  }
+  
 });
+
+
+
+
+
+
+
+
+
 
 
 

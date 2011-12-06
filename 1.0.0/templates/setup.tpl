@@ -75,7 +75,7 @@
 						<option>Financial Services</option>
 						<option>Religious Organizations</option>
 					</select>
-					<p>The category displayed up to 3 on this site.</p>
+					<p>The category displayed up to 3 on front.</p>
 				</td>
 			</tr>
 			<tr>
