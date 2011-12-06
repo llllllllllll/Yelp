@@ -85,10 +85,10 @@
 	  {
 			$sSql = "UPDATE ".$this->tbl_api_key." SET
 				  consumer_key 		= '".$api_key["consumer_key"]."',
-				  consumer_secret		= '".$api_key["consumer_secret"]."',
+				  consumer_secret	= '".$api_key["consumer_secret"]."',
 				  token				= '".$api_key["token"]."',
 				  token_secret		= '".$api_key["token_secret"]."'
-				  WHERE pdm_idx 		= ".$this->getUserId();
+				  WHERE pdm_idx 	= ".$this->getUserId();
 			$values = $this->query($sSql);
 	  }
 	  

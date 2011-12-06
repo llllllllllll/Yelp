@@ -43,6 +43,7 @@
     {
       $sql = "CREATE TABLE IF NOT EXISTS ".$this->tbl_api_key." (
 				ykid 			int(10) unsigned NOT NULL auto_increment PRIMARY KEY,
+				pdm_idx 		int(11) NOT NULL,
 				consumer_key 	varchar(50) NOT NULL,
 				consumer_secret varchar(50) NOT NULL,
 				token 			varchar(50) NOT NULL,

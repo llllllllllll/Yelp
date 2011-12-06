@@ -47,8 +47,8 @@
 		}
 		
 		$smarty->assign("records_exist", "true");
-		$response 	= $yelp_api->run($record_count);
-		$bus_total 	= count($response["businesses"]);
+		//$response 	= $yelp_api->run($record_count);
+		//$bus_total 	= count($response["businesses"]);
 	}
 	else
 	{
