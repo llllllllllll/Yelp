@@ -224,6 +224,20 @@ jQuery(document).ready(function($){
     return false;
   });
   
+  // Re-arrange category orders
+  $("img.PG_Yelp_move").click(function(){
+    var move_val = $(this).attr("alt");
+    var curr_opt = $('#show_html_value option:selected');
+    
+    if(move_val == "Down")
+    {
+      curr_opt.insertAfter(curr_opt.next());
+    }
+    else
+    {
+      curr_opt.insertBefore(curr_opt.prev());
+    }
+  });
   
   
 });

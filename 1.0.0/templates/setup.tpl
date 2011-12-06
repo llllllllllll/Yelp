@@ -51,7 +51,7 @@
 			<tr>
 				<th>Category</th>
 				<td class="PG_{$PLUGIN_NAME}_move">
-					<p><a href="#"><img src="images/u131_original.png" alt="" /></a><a href="#"><img src="images/u137_original.png" alt="" /></a></p>
+					<p><a href="#"><img class="PG_{$PLUGIN_NAME}_move" src="images/u131_original.png" alt="Up" /></a><a href="#"><img class="PG_{$PLUGIN_NAME}_move" src="images/u137_original.png" alt="Down" /></a></p>
 					<select title="select rows" class="rows PG_{$PLUGIN_NAME}_menu" id="show_html_value" size="2">
 						<option>Restaurants</option>
 						<option>Food</option>
