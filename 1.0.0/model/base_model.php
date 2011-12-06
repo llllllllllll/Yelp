@@ -45,6 +45,23 @@
 			return $values;
 	  }
 	  //------- end
+	  
+	  public function default_categories()
+	  {
+			$init_categories 	= $this->categories();
+			$default_row_count	= count($init_categories);
+			$counter 			= 1;
+			$categories			= "";
+			foreach($init_categories as $key=>$values)
+			{
+				  if($counter < $default_row_count)
+						$categories .= $key.",";
+				  else
+						$categories .= $key;
+				  $counter++;
+			}
+			return $categories;
+	  }
 	
 	  /*
 	  | --------------------
@@ -75,20 +92,12 @@
 	  {
 			$init_categories 	= $this->categories();
 			$default_row_count	= count($init_categories);
-			$counter 			= 1;
-			$categories			= "";
-			foreach($init_categories as $key=>$values)
-			{
-				  if($counter < $default_row_count)
-						$categories .= $key.",";
-				  else
-						$categories .= $key;
-				  $counter++;
-			}
+			$default_categories	= $this->default_categories();
+			
 			$sSql = "INSERT INTO ".$this->tbl_option."
 				  (pdm_idx,default_category,category,total_category,show_rows,template)
 				  VALUES
-				  (".$this->getUserId().",'general','".$categories."',".$default_row_count.",5,'blue')";
+				  (".$this->getUserId().",'general','".$default_categories."',".$default_row_count.",5,'blue')";
 				  
 			$values = $this->query($sSql);
 	  }

@@ -47,3 +47,5 @@ input.no_border {border:0;}
 .PG_Yelp_move {padding-left:10px !important;}
 .PG_Yelp_move img {margin-right:2px;}
 .PG_Yelp_image img {margin-right:33px;}
+
+.add_link{ cursor: pointer; }

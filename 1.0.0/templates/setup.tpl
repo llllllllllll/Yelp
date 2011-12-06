@@ -86,12 +86,18 @@
 			</table>
 			<div class="tbl_lb_wide_btn">
 				<a href="" class="btn_apply" title="Save changes" id="PG_{$PLUGIN_NAME}_save">Save</a>
-				<a class="add_link" title="Reset to default">Reset to Default</a>
+				{if $records_exist eq 'true'}
+					<a class="add_link" id="PG_{$PLUGIN_NAME}_reset" title="Reset to default">Reset to Default</a>
+				{/if}
 			</div>
 	</div>
 	<input type="hidden" name="PG_PG_NAME" id="PG_PG_NAME" value="{$PLUGIN_NAME}" />
 	<input type="hidden" name="PG_{$PLUGIN_NAME}_records_exist" id="PG_{$PLUGIN_NAME}_records_exist" value="{$records_exist}" />
 	<input type="hidden" name="PG_{$PLUGIN_NAME}_getter" id="PG_{$PLUGIN_NAME}_getter" value="{$getterPhp}" />
+	{if $records_exist eq 'true'}
+		<input type="hidden" name="PG_{$PLUGIN_NAME}_categories_hidden" id="PG_{$PLUGIN_NAME}_getter" value="{$default_categories}" />
+	{/if}
+	
 </body>
 </html>
 

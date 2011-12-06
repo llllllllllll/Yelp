@@ -78,6 +78,10 @@
 		{
 			$smarty->assign("api_validity", "true");
 		}
+		
+		// Default Categories
+		$default_categories	= $db_admin->default_categories();
+		$smarty->assign("default_categories", $default_categories);
 	}
 	else
 	{

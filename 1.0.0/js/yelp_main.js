@@ -241,8 +241,15 @@ jQuery(document).ready(function($){
     }
   });
   
-  // Get the total rows of categories
-  var CATGRY_LEN    = $("#show_html_value option").length;
+  // Reset options but API Keys
+  $("#PG_Yelp_reset").click(function(){
+    // Default Categories
+    $("#PG_"+PG_name()+"_def_general").attr("checked", true);
+    // Show rows
+    $("#PG_"+PG_name()+"_rows").val("5");
+    // Template
+    $("#PG_"+PG_name()+"_template_blue").attr("checked", true);
+  });
   
   
   
