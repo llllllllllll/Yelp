@@ -89,6 +89,7 @@
 		$smarty->assign("default_category", $default_category);
 		$smarty->assign("template", $template);
 		$smarty->assign("records_exist", "false");
+		$smarty->assign("api_validity", "API Keys are not set.");
 	}
 	
 	$smarty->assign("PLUGIN_NAME", PLUGIN_NAME);
