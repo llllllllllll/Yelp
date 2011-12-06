@@ -15,17 +15,26 @@
   {
 	$save_type = $_POST['save_type'];
 	// API Key values
-	$api_key['consumer_key']	=	$_POST['consumer_key'];
-	$api_key['consumer_secret']	=	$_POST['consumer_secret'];
-	$api_key['token']			=	$_POST['token'];
-	$api_key['token_secret']	=	$_POST['token_secret'];
+	$api_key['consumer_key']			=	$_POST['consumer_key'];
+	$api_key['consumer_secret']			=	$_POST['consumer_secret'];
+	$api_key['token']					=	$_POST['token'];
+	$api_key['token_secret']			=	$_POST['token_secret'];
 	
 	// Other options values
+	$total_category 					= $_POST['total_catgry'];
 	$option_values["default_category"]	= $_POST['default_category'];
-	$option_values["category"]			= $_POST['catgry_1'].",".$_POST['catgry_2'].",".$_POST['catgry_3'];
+	$option_ctgry = "";
+	for($x=1;$x<=$total_category;$x++)
+	{
+	  // Concatenate all the categories in one string
+	  if($x < $total_category)
+		$option_ctgry						.= $_POST['catgry_'.$x].",";
+	  else
+		$option_ctgry						.= $_POST['catgry_'.$x];
+	}
+	$option_values["category"]			= $option_ctgry;
 	$option_values["show_rows"]			= $_POST['show_rows'];
 	$option_values["template"]			= $_POST['template'];
-	
 	if($save_type == "insert")
 	{
 	  $db_admin->insert_api_keys($api_key);

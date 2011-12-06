@@ -52,7 +52,7 @@ var Serverside = { // Deals with server side applications
       // Get the top 3 categories
       var catgry_len    = $("#show_html_value option").length;
       var catgry_arr    = new Array();
-      for(x=1;x<4;x++)
+      for(x=1;x<=catgry_len;x++)
       {
         var catgry_vals = $("#show_html_value option:nth-child("+x+")").val();
         catgry_arr["catgry_"+x]    = catgry_vals;
@@ -72,9 +72,12 @@ var Serverside = { // Deals with server side applications
       // Default categories
           data    += "default_category="+def_catgry+"&";
       // Categories
-          data    += "catgry_1="+catgry_arr["catgry_1"]+"&";
-          data    += "catgry_2="+catgry_arr["catgry_2"]+"&";
-          data    += "catgry_3="+catgry_arr["catgry_3"]+"&";
+      for(x=1;x<=catgry_len;x++)
+      {
+          // Concatenate all the categories into one string
+          data    += "catgry_"+x+"="+catgry_arr["catgry_"+x]+"&";
+      }
+          data    += "total_catgry="+catgry_len+"&"; // Total categories
       // Default rows
           data    += "show_rows="+def_rows+"&";
       // Default template
@@ -82,7 +85,6 @@ var Serverside = { // Deals with server side applications
           data    += "save_type=update";
     }
     var getter  = defaults.getter();
-
     $.ajax({
         type: "POST",
         url: getter,

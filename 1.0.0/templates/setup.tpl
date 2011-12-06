@@ -58,16 +58,16 @@
 						<option>Nightlife</option>
 						<option>Shopping</option>
 						<option>Beauty and Spas</option>
-						<option>Arts &amp; Entertainment</option>
+						<option>Arts and Entertainment</option>
 						<option>Active Life</option>
 						<option>Health and Medical</option>
-						<option>Hotels &amp; Travel</option>
+						<option>Hotels and Travel</option>
 						<option>Local Services</option>
 						<option>Home Services</option>
 						<option>Automotive</option>
 						<option>Local Flavor</option>
 						<option>Pets</option>
-						<option>Public Services &amp; Government</option>
+						<option>Public Services and Government</option>
 						<option>Education</option>
 						<option>Professional Services</option>
 						<option>Real Estate</option>
