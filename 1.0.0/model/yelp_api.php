@@ -7,7 +7,7 @@
             if($record_count > 0)
             {
                 //$unsigned_url = "http://api.yelp.com/v2/business/the-waterboy-sacramento";
-                $unsigned_url = "http://api.yelp.com/v2/search?category_filter=active&location=San+Francisco";
+                $unsigned_url = "http://api.yelp.com/v2/search?term=yelp&location=sf";
                 
                 // Set your keys here
                 $consumer_key = "uQbfJjWPd4VX1J1ayguJ_w";

@@ -81,7 +81,7 @@
 			<tr>
 				<th><label for="show_html_value">Shows Rows</label></th>
 				<td>
-					<span class="neccesary">*</span> <input id="PG_{$PLUGIN_NAME}_rows" class="fix" type="text" maxlength="255" value="5"/>
+					<span class="neccesary">*</span> <input id="PG_{$PLUGIN_NAME}_rows" class="fix" type="text" maxlength="255" {if $records_exist eq 'true'}value="{$show_rows}"{/if} />
 				</td>
 			</tr>
 			<tr>
@@ -89,8 +89,8 @@
 				<td class="PG_{$PLUGIN_NAME}_move">			
 					<!-- Select form The image List -->
 					<div id="image_list_wrap">	
-						<input type="radio" name="PG_{$PLUGIN_NAME}_template_blue" class="input_rdo" id="PG_{$PLUGIN_NAME}_template_blue" /> <label class="lbl_rgt">Blue</label>
-						<input type="radio" name="PG_{$PLUGIN_NAME}_template_gray" class="input_rdo" id="PG_{$PLUGIN_NAME}_template_gray" /> <label class="lbl_rgt">Gray</label>
+						<input type="radio" name="PG_{$PLUGIN_NAME}_template_blue" class="input_rdo" id="PG_{$PLUGIN_NAME}_template_blue" {if $template eq 'blue'}checked="checked"{/if} /> <label class="lbl_rgt">Blue</label>
+						<input type="radio" name="PG_{$PLUGIN_NAME}_template_gray" class="input_rdo" id="PG_{$PLUGIN_NAME}_template_gray" {if $template eq 'gray'}checked="checked"{/if} /> <label class="lbl_rgt">Gray</label>
 						<p class="PG_{$PLUGIN_NAME}_image">
 							<img src="images/u128_original.png" alt="" />
 							<img src="images/u126_original.png" alt="" />
