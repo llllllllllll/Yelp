@@ -95,7 +95,7 @@
 	<input type="hidden" name="PG_{$PLUGIN_NAME}_records_exist" id="PG_{$PLUGIN_NAME}_records_exist" value="{$records_exist}" />
 	<input type="hidden" name="PG_{$PLUGIN_NAME}_getter" id="PG_{$PLUGIN_NAME}_getter" value="{$getterPhp}" />
 	{if $records_exist eq 'true'}
-		<input type="hidden" name="PG_{$PLUGIN_NAME}_categories_hidden" id="PG_{$PLUGIN_NAME}_getter" value="{$default_categories}" />
+		<input type="hidden" name="PG_{$PLUGIN_NAME}_categories_hidden" id="PG_{$PLUGIN_NAME}_categories_hidden" value="{$default_categories}" />
 	{/if}
 	
 </body>

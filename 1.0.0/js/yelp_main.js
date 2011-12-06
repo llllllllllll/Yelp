@@ -249,6 +249,16 @@ jQuery(document).ready(function($){
     $("#PG_"+PG_name()+"_rows").val("5");
     // Template
     $("#PG_"+PG_name()+"_template_blue").attr("checked", true);
+    // Category list
+    var slice_catgry  = $("#PG_"+PG_name()+"_categories_hidden").val();
+    var catrgy_res    = slice_catgry.split(",");
+    var total_ctrgy   = catrgy_res.length;
+    
+    $("#show_html_value").empty(); // Empty the category list to populate with defaults
+    for(x=0;x<total_ctrgy;x++)
+    {
+      $("#show_html_value").append("<option>"+catrgy_res[x]+"</option>");
+    }
   });
   
   
