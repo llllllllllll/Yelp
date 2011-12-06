@@ -15,6 +15,9 @@
 				<col width="115px" />
 				<col width="*" />
 			</colgroup>
+			{if $api_validity neq 'true'}
+				<tr><th></th><td style="color: red;">[WARNING]: {$api_validity}</td></tr>
+			{/if}
 			<tr>
 				<th>Consumer Key</th>
 				<td><input type="text" id="PG_{$PLUGIN_NAME}_API_consumer_key" name="PG_{$PLUGIN_NAME}_API_consumer_key" class="fix" maxlength="255" style="width: 160px;" {if $records_exist eq 'true'}value="{$consumer_key}"{/if} /></td>

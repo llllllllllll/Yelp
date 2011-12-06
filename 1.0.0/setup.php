@@ -56,8 +56,28 @@
 		}
 		$smarty->assign("total_category", $total_category);
 		$smarty->assign("records_exist", "true");
-		//$response 	= $yelp_api->run($record_count);
-		//$bus_total 	= count($response["businesses"]);
+
+		// Checks if API Keys are valid
+		$response 	= $yelp_api->run($record_count);
+		
+		if(isset($response["error"]))
+		{
+			if($response["error"]["id"] == "INVALID_OAUTH_CREDENTIALS")
+				$api_error	= "Consumer Key is invalid.";
+			elseif($response["error"]["id"] == "INVALID_SIGNATURE")
+				$api_error	= "Consumer Secret or Token is invalid.";
+			elseif($response["error"]["id"] == "INVALID_PARAMETER")
+				$api_error	= "Token is invalid.";
+			elseif($response["error"]["id"] == "EXCEEDED_REQS")
+				$api_error	= "You have reached the maximum number of daily request.";
+			else
+				$api_error	= "Unknown error.";
+			$smarty->assign("api_validity", $api_error);
+		}
+		else
+		{
+			$smarty->assign("api_validity", "true");
+		}
 	}
 	else
 	{

@@ -1,6 +1,6 @@
 <?php
     require_once("libs/OAuth.php");
-    class Yelp_api extends utilDb
+    class Yelp_api extends PG_Yelp_db
     {
         public function run($record_count)
         {
