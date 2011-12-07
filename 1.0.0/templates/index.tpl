@@ -6,9 +6,9 @@
 		<ul class="PG_{$PLUGIN_NAME}_nav">
 			{section name=x start=0 loop=3 step=1}
 				{if {$smarty.section.x.index} eq 0}
-					<li><a href="" class="on">{$ctrgy_{$smarty.section.x.index}}</a></li>
+					<li><a href="{$ctrgy_{$smarty.section.x.index}_link}" class="on">{$ctrgy_{$smarty.section.x.index}}</a></li>
 				{else}
-					<li><a href="" class="off">{$ctrgy_{$smarty.section.x.index}}</a></li>
+					<li><a href="{$ctrgy_{$smarty.section.x.index}_link}" class="off">{$ctrgy_{$smarty.section.x.index}}</a></li>
 				{/if}
 			{/section}
 		</ul>

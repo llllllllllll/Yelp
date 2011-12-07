@@ -42,9 +42,12 @@
 		$total_category = 3;
 		$category 		= $option_values["category"];
 		$slice_ctgry = explode(",", $category);
+		// Get the link of each category
+		$ctgry_list = $db_admin->categories();
 		for($x=0;$x<$total_category;$x++)
 		{
 			$smarty->assign("ctrgy_".$x, $slice_ctgry[$x]);
+			$smarty->assign("ctrgy_".$x."_link", $ctgry_list[$slice_ctgry[$x]]);
 		}
 		$smarty->assign("total_category", $total_category);
 		$smarty->assign("records_exist", "true");
