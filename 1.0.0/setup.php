@@ -28,7 +28,7 @@
 	| - Otherwise, assign field values to its key
 	| -----------------------------------------------
 	*/
-	if($yelp_api->run($record_count) != false)
+	if($yelp_api->run($record_count,$yelp_api->def_generalUrl()) != false)
 	{
 		// API Key table
 		$api_key_values = $db_admin->PG_Yelp_values("PG_Yelp_api_key");
@@ -58,7 +58,7 @@
 		$smarty->assign("records_exist", "true");
 
 		// Checks if API Keys are valid
-		$response 	= $yelp_api->run($record_count);
+		$response 	= $yelp_api->run($record_count,$yelp_api->def_generalUrl());
 		
 		if(isset($response["error"]))
 		{
@@ -100,7 +100,7 @@
 	$smarty->assign("PG_BASE_PATH", $sPgDir);
 	$smarty->assign("server_base_url",SERVER_BASE_URL);
 	$smarty->assign( 'sScriptCrossDomain' , CAFE24_CROSS_DOMAIN );
-	$smarty->assign("getterPhp",$sPgDir."/model/getter.php");
+	$smarty->assign("getterPhp",$sPgDir."/getter.php");
 	
 	$smarty->display('setup.tpl');
 

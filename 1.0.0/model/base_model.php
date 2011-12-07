@@ -130,7 +130,7 @@
 	  public function categories()
 	  {
 			$cat_array = array(
-				"Restaurants"					=> "http://www.yelp.com/c/sf/restaurants",
+				"Restaurants"					=> "http://api.yelp.com/v2/search?term=restaurants&location=sf",
 				"Food"							=> "http://www.yelp.com/c/sf/food",
 				"Nightlife"						=> "http://www.yelp.com/c/sf/nightlife",
 				"Shopping"						=> "http://www.yelp.com/c/sf/shopping",

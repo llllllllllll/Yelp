@@ -27,6 +27,23 @@ var defaults = { // Default values
   }
 }
 
+var constructor = {
+  initial_display: function()
+  {
+    var getter  = defaults.getter();
+    var link    = $("ul.PG_"+PG_name()+"_nav li a.on ").attr("href");
+    var data    = "link="+link+"&init_display=1";
+    $.ajax({
+      type: "POST",
+      url: getter,
+      data: data,
+      success: function(data){
+        alert(data);
+      }
+    });
+  }
+}
+
 var Serverside = { // Deals with server side applications
   
   save: function(api_keys) // Save 
@@ -164,32 +181,38 @@ var Serverside = { // Deals with server side applications
 jQuery(document).ready(function($){
   
   // Front ------------------------
-  
-  // Check if settings are set
-  if(defaults.records_exist() != "true")
+  if($("div#PG_"+PG_name()+"_Front_mainContainer").length > 0)
   {
-    $("ul.PG_"+PG_name()+"_nav").remove();
-    $("div.PG_"+PG_name()+"_content_wrap").remove();
-    $("div#PG_"+PG_name()).append("<span style='margin-top: 10px; display: block; text-align: center;'>Settings are not set yet.</span>");
+    // Check if settings are set
+    if(defaults.records_exist() != "true")
+    {
+      $("ul.PG_"+PG_name()+"_nav").remove();
+      $("div.PG_"+PG_name()+"_content_wrap").remove();
+      $("div#PG_"+PG_name()).append("<span style='margin-top: 10px; display: block; text-align: center;'>Settings are not set yet.</span>");
+    }
+    
+    // Initial display
+    constructor.initial_display();
+    
+    // Tab
+    $("ul.PG_Yelp_nav li a").click(function(){
+      // Selected tab animation
+      var style = $(this).attr("class");
+  
+      $("ul.PG_Yelp_nav li a").removeClass("on off");
+      $("ul.PG_Yelp_nav li a").addClass("off");
+      $(this).removeClass("off");
+      $(this).addClass("on");
+      
+      // Fetch datas
+      var link        = $(this).attr("href");
+      Serverside.curl(link);
+      
+      // Prevent page from refreshing
+      return false; 
+    });
   }
   
-  // Tab
-  $("ul.PG_Yelp_nav li a").click(function(){
-    // Selected tab animation
-    var style = $(this).attr("class");
-
-    $("ul.PG_Yelp_nav li a").removeClass("on off");
-    $("ul.PG_Yelp_nav li a").addClass("off");
-    $(this).removeClass("off");
-    $(this).addClass("on");
-    
-    // Fetch datas
-    var link        = $(this).attr("href");
-    Serverside.curl(link);
-    
-    // Prevent page from refreshing
-    return false; 
-  });
   
   
   // Setup-------------------------

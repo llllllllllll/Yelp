@@ -2,12 +2,12 @@
     require_once("libs/OAuth.php");
     class Yelp_api extends PG_Yelp_db
     {
-        public function run($record_count)
+        public function run($record_count,$url)
         {
             if($record_count > 0)
             {
                 // GENERAL CATEGORY
-                $unsigned_url       = $this->def_generalUrl();
+                $unsigned_url       = $url;
                 $values             = $this->PG_Yelp_values("PG_Yelp_api_key");
                 
                 // Set your keys here

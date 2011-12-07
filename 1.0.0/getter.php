@@ -1,14 +1,18 @@
 <?php
-  require_once("../configs/core_conf.php");
-  require_once("base_model.php");
-  require_once("../libs/simple_html_dom.php");
+  require_once("configs/core_conf.php");
+  require_once("model/base_model.php");
+  require_once("model/yelp_api.php");  
   
   /*
   | ----------------------------------
-  | Initialize main Yelp class
+  | Initialize main Yelp class and API
   | ----------------------------------
   */
   $db_admin = new PG_Yelp_db();
+  $yelp_api = new Yelp_api();
+  
+  $tbl_option_empty = $db_admin->count_settings("PG_Yelp_api_key");
+  $record_count = $tbl_option_empty[0]['settings_count'];
   
   // Save Yelp settings
   if(isset($_POST['save_type']))
@@ -48,3 +52,25 @@
 	  $db_admin->update_options($option_values);
 	}
   }
+  
+  // Initial fron display
+  if(isset($_POST['init_display']))
+  {
+	$response = $yelp_api->run($record_count,$_POST['link']);
+	echo "<pre>";
+	print_r($response);
+	echo "</pre>";
+	//echo $_POST['link'];
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
