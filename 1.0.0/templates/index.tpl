@@ -4,14 +4,20 @@
 	<div id="PG_{$PLUGIN_NAME}">
 		<h1>Yelp</h1>
 		<ul class="PG_{$PLUGIN_NAME}_nav">
-			
-			{section name=x start=1 loop=4 step=1}
+			{section name=x start=0 loop=3 step=1}
+				{if {$smarty.section.x.index} eq 0}
+					<li><a href="" class="on">{$ctrgy_{$smarty.section.x.index}}</a></li>
+				{else}
+					<li><a href="" class="off">{$ctrgy_{$smarty.section.x.index}}</a></li>
+				{/if}
+			{/section}
+			<!--{section name=x start=1 loop=4 step=1}
 				{if {$smarty.section.x.index} eq 1}
 					<li><a href="{${$catrg_{$smarty.section.x.index}}}" class="on">{$catrg_{$smarty.section.x.index}}</a></li>
 				{else}
 					<li><a href="{${$catrg_{$smarty.section.x.index}}}" class="off">{$catrg_{$smarty.section.x.index}}</a></li>
 				{/if}
-			{/section}
+			{/section}-->
 		</ul>
 	
 		<div class="PG_{$PLUGIN_NAME}_content_wrap">

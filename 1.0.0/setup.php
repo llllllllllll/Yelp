@@ -101,6 +101,7 @@
 	$smarty->assign("server_base_url",SERVER_BASE_URL);
 	$smarty->assign( 'sScriptCrossDomain' , CAFE24_CROSS_DOMAIN );
 	$smarty->assign("getterPhp",$sPgDir."/model/getter.php");
+	
 	$smarty->display('setup.tpl');
 
 	

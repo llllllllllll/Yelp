@@ -1,14 +1,15 @@
 <?php
   require_once("configs/core_conf.php");
   require_once("model/base_model.php");
-  require_once("libs/simple_html_dom.php");
+  require_once("model/yelp_api.php");
   
-  /*
+	/*
 	| ----------------------------------
-	| Initialize main Yelp class
+	| Initialize main Yelp class and API
 	| ----------------------------------
 	*/
 	$db_admin = new PG_Yelp_db();
+	$yelp_api = new Yelp_api();
 	
 	/*
 	| -----------------------------------------------
@@ -27,19 +28,64 @@
 	| - Otherwise, assign field values to its key
 	| -----------------------------------------------
 	*/
-	if($record_count > 0)
+	if($yelp_api->run($record_count) != false)
 	{
-		$api_key_values = $db_admin->PG_Yelp_values();
-		foreach($api_key_values as $key=>$value)
+		// Yelp option table
+		$option_values = $db_admin->PG_Yelp_values("PG_Yelp_option");
+		foreach($option_values as $key=>$value)
 		{
-			// assign field values to its key
+			// Assign field values to its key
 			$smarty->assign($key, $value);
 		}
+		
+		// Get the top 3 categories
+		$total_category = 3;
+		$category 		= $option_values["category"];
+		$slice_ctgry = explode(",", $category);
+		for($x=0;$x<$total_category;$x++)
+		{
+			$smarty->assign("ctrgy_".$x, $slice_ctgry[$x]);
+		}
+		$smarty->assign("total_category", $total_category);
+		$smarty->assign("records_exist", "true");
+
+		// Checks if API Keys are valid
+		$response 	= $yelp_api->run($record_count);
+		
+		if(isset($response["error"]))
+		{
+			if($response["error"]["id"] == "INVALID_OAUTH_CREDENTIALS")
+				$api_error	= "Consumer Key is invalid.";
+			elseif($response["error"]["id"] == "INVALID_SIGNATURE")
+				$api_error	= "Consumer Secret or Token is invalid.";
+			elseif($response["error"]["id"] == "INVALID_PARAMETER")
+				$api_error	= "Token is invalid.";
+			elseif($response["error"]["id"] == "EXCEEDED_REQS")
+				$api_error	= "You have reached the maximum number of daily request.";
+			else
+				$api_error	= "Unknown error.";
+			$smarty->assign("api_validity", $api_error);
+		}
+		else
+		{
+			$smarty->assign("api_validity", "true");
+		}
+		
+		// Default Categories
+		$default_categories	= $db_admin->default_categories();
+		$smarty->assign("default_categories", $default_categories);
 	}
 	else
 	{
-		//If PG_Yelp_option has no value,
-		//set every field name values to NULL.
+		// If PG_Yelp_option has no value,
+		// set every field name values to NULL.
+		$default_category 	= "general";
+		$template			= "blue";
+		
+		$smarty->assign("default_category", $default_category);
+		$smarty->assign("template", $template);
+		$smarty->assign("records_exist", "false");
+		$smarty->assign("api_validity", "API Keys are not set.");
 	}
 	
 	$smarty->assign("PLUGIN_NAME", PLUGIN_NAME);
