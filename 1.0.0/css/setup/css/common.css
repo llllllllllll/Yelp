@@ -41,7 +41,8 @@ p.input_intro {clear:both;margin-bottom:17px}
 .p_input p {margin-bottom:12px}
 .p_input p .p_s {font-size:11px;line-height:14px;}
 
-.error {color:#dc4e22 !important}
+.error { border: 2px solid #DC4E22 !important; color: #DC4E22;}
+.error_msg{ color: #DC4E22; }
 .highlight {color:#693 !important}
 .alert_txt {margin:0 !important;color:#d55;}
 

@@ -10,7 +10,7 @@
 			<p class="require"><span class="neccesary">*</span> Required</p>
 			<!-- input area -->			
 
-			<table border="1" cellspacing="0" class="table_input_vr">
+			<table border="1" cellspacing="0" class="table_input_vr" id="PG_{$PLUGIN_NAME}_APIs">
 			<colgroup>
 				<col width="115px" />
 				<col width="*" />
@@ -39,7 +39,7 @@
 			<p class="require"><span class="neccesary">*</span> Required</p>
 			<!-- input area -->			
 
-			<table border="1" cellspacing="0" class="table_input_vr">
+			<table border="1" cellspacing="0" class="table_input_vr" id="PG_{$PLUGIN_NAME}_otherTbl">
 			<colgroup>
 				<col width="115px" />
 				<col width="*" />
