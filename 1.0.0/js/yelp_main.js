@@ -24,7 +24,6 @@ var defaults = { // Default values
   {
     var records_exist = $("#PG_"+PG_name()+"_records_exist").val();
     return records_exist;
-    //.css("disabled", "disabled");
   }
 }
 
@@ -165,6 +164,14 @@ var Serverside = { // Deals with server side applications
 jQuery(document).ready(function($){
   
   // Front ------------------------
+  
+  // Check if settings are set
+  if(defaults.records_exist() != "true")
+  {
+    $("ul.PG_"+PG_name()+"_nav").remove();
+    $("div.PG_"+PG_name()+"_content_wrap").remove();
+    $("div#PG_"+PG_name()).append("<span style='margin-top: 10px; display: block; text-align: center;'>Settings are not set yet.</span>");
+  }
   
   // Tab
   $("ul.PG_Yelp_nav li a").click(function(){

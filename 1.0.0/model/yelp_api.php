@@ -7,7 +7,7 @@
             if($record_count > 0)
             {
                 // GENERAL CATEGORY
-                $unsigned_url       = "http://api.yelp.com/v2/search?term=yelp&location=sf";
+                $unsigned_url       = $this->def_generalUrl();
                 $values             = $this->PG_Yelp_values("PG_Yelp_api_key");
                 
                 // Set your keys here
@@ -51,9 +51,26 @@
             return $response;
         }
         
-        public function test()
+        public function def_generalUrl()
         {
-            $msg = "Hello World";
-            return $msg;
+            $unsigned_url   = "http://api.yelp.com/v2/search?term=yelp&location=sf";
+            return $unsigned_url;
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
