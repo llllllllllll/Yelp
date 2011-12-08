@@ -67,14 +67,14 @@ var constructor = { // Initial functionalities
         // Result count
         var return_len  = data["businesses"].length;
         // Default number of rows displayed
-        var row_count   = 5;
+        var _row_count   = 5;
         // Creates a ul container for results list
         var ul_         = "<ul class='PG_"+PG_name()+"_contentnews'>";
             ul_         += "</ul>";
         $("div.PG_"+PG_name()+"_content_wrap").append(ul_);
         
         // Listing results
-        for(var x=0;x<row_count;x++)
+        for(var x=0;x<_row_count;x++)
         {
           // Image rating URL
           var img_rating    = html_helpers.h_img(data["businesses"][x]["rating_img_url"]);
@@ -93,37 +93,44 @@ var constructor = { // Initial functionalities
             {
               // If there are more than one, concatenate all the neighbors in one string
               if(z != neighbor_len)
-                neighborhoods += data["businesses"][x]["location"]["neighborhoods"][z]+", ";
+                neighborhoods += html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][z]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][z])+", ";
               else //If last neighbor, don't put a single comma at the end
-                neighborhoods += data["businesses"][x]["location"]["neighborhoods"][z];
+                neighborhoods += html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][z]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][z]);
             }
           }
           else
           {
             // Only one neighbor
-            var neighborhoods = data["businesses"][x]["location"]["neighborhoods"][0];
+            var neighborhoods = html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][0]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][0]);
           }
           // Categories
-          //var category_len  = data["businesses"][0]["categories"].length;
-          //if(category_len > 1)
-          //{
-          //  var category_title = "";
-          //  for(y=0;y<category_len;y++)
-          //  {
-          //    // If there are more than one, concatenate all the neighbors in one string
-          //    var last_index = category_len - 1;
-          //    if(y == last_index)
-          //      //If last neighbor, don't put a single comma at the end
-          //      category_title += data["businesses"][x]["categories"][y][0];
-          //    else 
-          //      category_title += data["businesses"][x]["categories"][y][0]+", ";
-          //  }
-          //}
-          //else
-          //{
-          //  var category_title = data["businesses"][x]["categories"][0][0];
-          //}
-          
+          var category_len  = data["businesses"][x]["categories"].length;
+          if(category_len > 1)
+          {
+            var category_title = "";
+            for(var y=0;y<category_len;y++)
+            {
+              // If there are more than one, concatenate all the neighbors in one string
+              var last_index = category_len - 1;
+              if(y == last_index)
+              {
+                //If last neighbor, don't put a single comma at the end
+                category_title += data["businesses"][x]["categories"][y][0];
+              }
+              else
+              {
+                category_title += data["businesses"][x]["categories"][y][0]+", ";
+              }
+            }
+          }
+          else if(category_len == 1)
+          {
+            var category_title = data["businesses"][x]["categories"][0][0];
+          }
+          else
+          {
+            var category_title = "No Categories";
+          }
           // Full content list
           var html_ = "<li>";
             html_ += "<span>";
@@ -139,7 +146,7 @@ var constructor = { // Initial functionalities
             html_ += "  	  <a href='/search?cflt=restaurants&find_loc=SOMA%2C+San+Francisco%2C+CA'>"+neighborhoods+"</a>";
             html_ += "  	</li>";
 			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>Categories:";
-            //html_ += "  	  <a href='/c/sf/desserts'>"+category_title+"</a>";
+            html_ += "  	  <a href='/c/sf/desserts'>"+category_title+"</a>";
             html_ += "  	</li>";
 			html_ += "  </ol>";
 			html_ += "  <p class='PG_"+PG_name()+"_toggle_content' style='display:none'>"	
@@ -434,6 +441,9 @@ jQuery(document).ready(function($){
     {
       curr_opt.insertBefore(curr_opt.prev());
     }
+    
+    // Prevent page from refreshing
+    return false;
   });
   
   // Reset options but API Keys

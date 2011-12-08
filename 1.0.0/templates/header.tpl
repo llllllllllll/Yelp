@@ -16,7 +16,8 @@
   <link href="{$sPgDir}/css/setup/css/ie6.css" rel="stylesheet" type="text/css" media="screen" />	
   <![endif]-->
   
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <!--<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>-->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
 	<script type="text/javascript" src="{$sPgDir}/js/yelp_main.js"></script>
   <script type="text/javascript" src="{$server_base_url}lib/js/common.js"></script>
 	<script type="text/javascript" src="{$server_base_url}lib/js/jquery.validate.js"></script>
