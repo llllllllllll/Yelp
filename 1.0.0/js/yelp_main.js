@@ -322,6 +322,18 @@ var Serverside = { // Deals with server side applications
     //$("ul.PG_"+PG_name()+"_contentnews").hide();
     //$("div#PG_"+PG_name()+"_ajaxloader").remove();
     //$("div.PG_"+PG_name()+"_content_wrap").append(loader);
+  },
+  
+  tabs: function()
+  {
+    // Image loader
+    var loader  = "<div id='PG_Yelp_ajaxloader'>";
+        loader += "<img src='"+defaults.basepath()+"/images/ajax-loader_yelp.gif'>";
+        loader += "</div>";
+    
+    $("ul.PG_"+PG_name()+"_contentnews").hide();
+    $("div#PG_"+PG_name()+"_ajaxloader").remove();
+    $("div.PG_"+PG_name()+"_content_wrap").append(loader);
   }
   
 }
@@ -354,7 +366,7 @@ jQuery(document).ready(function($){
       
       // Fetch datas
       var link        = $(this).attr("href");
-      Serverside.curl(link);
+      Serverside.tabs();
       
       // Prevent page from refreshing
       return false; 
