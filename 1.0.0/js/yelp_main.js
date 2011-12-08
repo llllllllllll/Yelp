@@ -54,118 +54,11 @@ var constructor = { // Initial functionalities
   // Front
   initial_display: function()
   {
-    var getter  = defaults.getter();
     // Default and first selected category upon page load
     var link    = $("ul.PG_"+PG_name()+"_nav li a.on ").attr("href");
     var trigger = "init_display";
 
-    $.ajax({
-      type: "POST",
-      url: getter,
-      data: { link: link, trigger: trigger},
-      dataType: "json",
-      success: function(data){
-        // Result count
-        var return_len  = data["businesses"].length;
-        // Default number of rows displayed
-        var _row_count   = 5;
-        // Creates a ul container for results list
-        var ul_         = "<ul class='PG_"+PG_name()+"_contentnews'>";
-            ul_         += "</ul>";
-        $("div.PG_"+PG_name()+"_content_wrap").append(ul_);
-        
-        // Listing results
-        for(var x=0;x<_row_count;x++)
-        {
-          // Image rating URL
-          var img_rating    = html_helpers.h_img(data["businesses"][x]["rating_img_url"]);
-          // Business title
-          var title         = data["businesses"][x]["name"];
-          var title_url     = data["businesses"][x]["url"];
-          var title_link    = html_helpers.h_link(title_url,title,"_blank","no_underline");
-          // Review count
-          var review_count  = data["businesses"][x]["review_count"];
-          // Neighborhood/s
-          var neighbor_len  = data["businesses"][x]["location"]["neighborhoods"].length;
-          if(neighbor_len > 1) // Counts if there are more than one neighbor
-          {
-            var neighborhoods = "";
-            for(var z=0;z<neighbor_len;z++)
-            {
-              // If there are more than one, concatenate all the neighbors in one string
-              if(z != neighbor_len)
-                neighborhoods += html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][z]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][z])+", ";
-              else //If last neighbor, don't put a single comma at the end
-                neighborhoods += html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][z]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][z]);
-            }
-          }
-          else
-          {
-            // Only one neighbor
-            var neighborhoods = html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][0]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][0]);
-          }
-          // Categories
-          var category_len  = data["businesses"][x]["categories"].length;
-          if(category_len > 1)
-          {
-            var category_title = "";
-            for(var y=0;y<category_len;y++)
-            {
-              // If there are more than one, concatenate all the neighbors in one string
-              var last_index = category_len - 1;
-              if(y == last_index)
-              {
-                //If last neighbor, don't put a single comma at the end
-                category_title += html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][y][1],data["businesses"][x]["categories"][y][0]);
-              }
-              else
-              {
-                category_title += html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][y][1],data["businesses"][x]["categories"][y][0])+", ";
-              }
-            }
-          }
-          else if(category_len == 1)
-          {
-            var category_title = html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][0][1],data["businesses"][x]["categories"][0][0])+", ";
-            //var category_title = data["businesses"][x]["categories"][0][0];
-          }
-          else
-          {
-            var category_title = "No Categories";
-          }
-          // Full content list
-          var html_ = "<li>";
-            html_ += "<span>";
-            html_ += "  <img src='"+defaults.basepath()+"/images/pg_tree_p.gif' alt='Plus Sign' style='display:visible' />";
-            html_ += "  <img src='"+defaults.basepath()+"/images/pg_tree_m.gif' alt='Minus Sign' style='display:none' />"
-            html_ += "</span>";
-			html_ += "<div class='PG_"+PG_name()+"_content'>";
-			html_ += "  <p class='PG_"+PG_name()+"_title'>"+title_link+"</p>";
-			html_ += "  <div class='PG_"+PG_name()+"_rating'>"+img_rating+" <span style='float:left;margin:3px 0 0 5px'>"+review_count+" reviews</span></div>";
-			html_ += "  <ol id='PG_"+PG_name()+"_business-description'>"
-			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>"+defaults.default_location()+"</li>";
-			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>Neighborhood:";
-            html_ += "  	  <a href='/search?cflt=restaurants&find_loc=SOMA%2C+San+Francisco%2C+CA'>"+neighborhoods+"</a>";
-            html_ += "  	</li>";
-			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>Categories:";
-            html_ += "  	  <a href='/c/sf/desserts'>"+category_title+"</a>";
-            html_ += "  	</li>";
-			html_ += "  </ol>";
-			html_ += "  <p class='PG_"+PG_name()+"_toggle_content' style='display:none'>"	
-			html_ += "  	<a href='#'><img src='"+defaults.basepath()+"/images/pg_yelp_img1.jpg' alt='' /></a>";
-			html_ += "  	Problem #1: Out of beer after 11pm in fancy hotel downtown with no nearby open liquor stores.   Solution: TCB  Problem #2: Missed lunch at the SFGH caf and craving Rhea's. Solution: TCB  In both of the above instances, I was amazed by their fast friendly service and reasonable prices.  Tipping these guys is key- they are fast and work hard.  I'd recommend TCB for any of your random delivery needs...";
-			html_ += "  </p>";
-			html_ += "</div>";
-			html_ += "<p><a href='' class='PG_"+PG_name()+"_more' style='display:none'>more</a></p>";
-			html_ += "</li>";
-          // Remove the image loader
-          $("div#PG_"+PG_name()+"_ajaxloader").remove();
-          // Replace the image loader by the results
-          $("div.PG_"+PG_name()+"_content_wrap ul.PG_"+PG_name()+"_contentnews").append(html_);
-          //$("#PG_Yelp_Front_mainContainer").append(data["businesses"][x]["name"]+"<br />");
-        }
-      }
-    });
+    Serverside.fetch_tab_results(link,trigger);
   }
 }
 
@@ -271,61 +164,123 @@ var Serverside = { // Deals with server side applications
           }
         }
     });
-
-    // TABS
-    //var getter  = defaults.getter();
-    //var data    = "url="+link;
-    //
-    //$.ajax({
-    //  type: "POST",
-    //  url: getter,
-    //  dataType: "json",
-    //  data: data,
-    //  success: function(data){
-    //    var p_count = $("ul.PG_"+PG_name()+"_contentnews li").length;
-    //
-    //    $("div#PG_"+PG_name()+"_ajaxloader").remove();
-    //    $("ul.PG_"+PG_name()+"_contentnews").show();
-    //    
-    //    for(counter=1;counter<=p_count;counter++)
-    //    {
-    //      var json_counter = counter - 1;
-    //      // Title
-    //      var new_title       = "<p class='PG_"+PG_name()+"_title'>"+data["titles"][json_counter]+"</p>";
-    //      var title_selector  = "ul.PG_"+PG_name()+"_contentnews li:nth-child("+counter+") div.PG_"+
-    //                            PG_name()+"_content p.PG_"+
-    //                            PG_name()+"_title";
-    //      $(title_selector).replaceWith(new_title);
-    //      
-    //      // Reviews
-    //      var new_review      = "<div class='PG_"+PG_name()+"_rating'>"+data["reviews"][json_counter]+"</div>";
-    //      var review_selector = "ul.PG_"+PG_name()+
-    //                            "_contentnews li:nth-child("+counter+") div.PG_"+PG_name()+
-    //                            "_content div.PG_"+PG_name()+"_rating";
-    //      $(review_selector).replaceWith(new_review);
-    //      
-    //      // Business description
-    //      var new_busDesc      = data["bus_desc"][json_counter];
-    //      var busDesc_selector = "ul.PG_"+PG_name()+"_contentnews li:nth-child("+counter+") div.PG_"+
-    //                            PG_name()+"_content ol";
-    //      $(busDesc_selector+" li").remove();
-    //      $(busDesc_selector).html(new_busDesc); 
-    //    }
-    //  }
-    //});
-    //
-    //// Image loader
-    //var loader  = "<div id='PG_Yelp_ajaxloader'>";
-    //    loader += "<img src='"+defaults.basepath()+"/images/ajax-loader_yelp.gif'>";
-    //    loader += "</div>";
-    //    
-    //$("ul.PG_"+PG_name()+"_contentnews").hide();
-    //$("div#PG_"+PG_name()+"_ajaxloader").remove();
-    //$("div.PG_"+PG_name()+"_content_wrap").append(loader);
   },
   
-  tabs: function()
+  fetch_tab_results: function(i_link, i_trigger)
   {
+    $.ajax({
+      type: "POST",
+      url: defaults.getter(),
+      data: { link: i_link, trigger: i_link},
+      dataType: "json",
+      success: function(data){
+        // Result count
+        var return_len  = data["businesses"].length;
+        // Default number of rows displayed
+        var _row_count   = 5;
+        // Creates a ul container for results list
+        var ul_         = "<ul class='PG_"+PG_name()+"_contentnews'>";
+            ul_         += "</ul>";
+        $("div.PG_"+PG_name()+"_content_wrap").append(ul_);
+        
+        // Listing results
+        for(var x=0;x<_row_count;x++)
+        {
+          // Image rating URL
+          var img_rating    = html_helpers.h_img(data["businesses"][x]["rating_img_url"]);
+          // Business title
+          var title         = data["businesses"][x]["name"];
+          var title_url     = data["businesses"][x]["url"];
+          var title_link    = html_helpers.h_link(title_url,title,"_blank","no_underline");
+          // Review count
+          var review_count  = data["businesses"][x]["review_count"];
+          // Neighborhood/s
+          var neighbor_len  = data["businesses"][x]["location"]["neighborhoods"].length;
+          if(neighbor_len > 1) // Counts if there are more than one neighbor
+          {
+            var neighborhoods = "";
+            for(var z=0;z<neighbor_len;z++)
+            {
+              // If there are more than one, concatenate all the neighbors in one string
+              if(z != neighbor_len)
+                neighborhoods += html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][z]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][z])+", ";
+              else //If last neighbor, don't put a single comma at the end
+                neighborhoods += html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][z]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][z]);
+            }
+          }
+          else
+          {
+            // Only one neighbor
+            var neighborhoods = html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][0]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][0]);
+          }
+          // Categories
+          var category_len  = data["businesses"][x]["categories"].length;
+          if(category_len > 1)
+          {
+            var category_title = "";
+            for(var y=0;y<category_len;y++)
+            {
+              // If there are more than one, concatenate all the neighbors in one string
+              var last_index = category_len - 1;
+              if(y == last_index)
+              {
+                //If last neighbor, don't put a single comma at the end
+                category_title += html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][y][1],data["businesses"][x]["categories"][y][0]);
+              }
+              else
+              {
+                category_title += html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][y][1],data["businesses"][x]["categories"][y][0])+", ";
+              }
+            }
+          }
+          else if(category_len == 1)
+          {
+            var category_title = html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][0][1],data["businesses"][x]["categories"][0][0])+", ";
+            //var category_title = data["businesses"][x]["categories"][0][0];
+          }
+          else
+          {
+            var category_title = "No Categories";
+          }
+          // Full content list
+          var html_ = "<li>";
+            html_ += "<span>";
+            html_ += "  <img src='"+defaults.basepath()+"/images/pg_tree_p.gif' alt='Plus Sign' style='display:visible' />";
+            html_ += "  <img src='"+defaults.basepath()+"/images/pg_tree_m.gif' alt='Minus Sign' style='display:none' />"
+            html_ += "</span>";
+			html_ += "<div class='PG_"+PG_name()+"_content'>";
+			html_ += "  <p class='PG_"+PG_name()+"_title'>"+title_link+"</p>";
+			html_ += "  <div class='PG_"+PG_name()+"_rating'>"+img_rating+" <span style='float:left;margin:3px 0 0 5px'>"+review_count+" reviews</span></div>";
+			html_ += "  <ol id='PG_"+PG_name()+"_business-description'>"
+			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>"+defaults.default_location()+"</li>";
+			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>Neighborhood:";
+            html_ += "  	  <a href='/search?cflt=restaurants&find_loc=SOMA%2C+San+Francisco%2C+CA'>"+neighborhoods+"</a>";
+            html_ += "  	</li>";
+			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>Categories:";
+            html_ += "  	  <a href='/c/sf/desserts'>"+category_title+"</a>";
+            html_ += "  	</li>";
+			html_ += "  </ol>";
+			html_ += "  <p class='PG_"+PG_name()+"_toggle_content' style='display:none'>"	
+			html_ += "  	<a href='#'><img src='"+defaults.basepath()+"/images/pg_yelp_img1.jpg' alt='' /></a>";
+			html_ += "  	Problem #1: Out of beer after 11pm in fancy hotel downtown with no nearby open liquor stores.   Solution: TCB  Problem #2: Missed lunch at the SFGH caf and craving Rhea's. Solution: TCB  In both of the above instances, I was amazed by their fast friendly service and reasonable prices.  Tipping these guys is key- they are fast and work hard.  I'd recommend TCB for any of your random delivery needs...";
+			html_ += "  </p>";
+			html_ += "</div>";
+			html_ += "<p><a href='' class='PG_"+PG_name()+"_more' style='display:none'>more</a></p>";
+			html_ += "</li>";
+          // Remove the image loader
+          $("div#PG_"+PG_name()+"_ajaxloader").remove();
+          // Replace the image loader by the results
+          $("div.PG_"+PG_name()+"_content_wrap ul.PG_"+PG_name()+"_contentnews").append(html_);
+          //$("#PG_Yelp_Front_mainContainer").append(data["businesses"][x]["name"]+"<br />");
+        }
+      }
+    });
+  },
+  
+  tabs: function(_link)
+  {
+    var trigger = "init_display";
+    var link    = _link;
     // Image loader
     var loader  = "<div id='PG_Yelp_ajaxloader'>";
         loader += "<img src='"+defaults.basepath()+"/images/ajax-loader_yelp.gif'>";
@@ -334,6 +289,8 @@ var Serverside = { // Deals with server side applications
     $("ul.PG_"+PG_name()+"_contentnews").hide();
     $("div#PG_"+PG_name()+"_ajaxloader").remove();
     $("div.PG_"+PG_name()+"_content_wrap").append(loader);
+    
+    this.fetch_tab_results(link,trigger);
   }
   
 }
@@ -366,7 +323,7 @@ jQuery(document).ready(function($){
       
       // Fetch datas
       var link        = $(this).attr("href");
-      Serverside.tabs();
+      Serverside.tabs(link);
       
       // Prevent page from refreshing
       return false; 
