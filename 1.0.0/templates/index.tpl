@@ -14,7 +14,10 @@
 		</ul>
 	
 		<div class="PG_{$PLUGIN_NAME}_content_wrap">
-			<ul class="PG_{$PLUGIN_NAME}_contentnews">
+			<div id="PG_Yelp_ajaxloader">
+				<img src="{$PG_BASE_PATH}/images/ajax-loader_yelp.gif">
+			</div>
+			<!--<ul class="PG_{$PLUGIN_NAME}_contentnews">
 				<li>
 					<span><img src="images/pg_tree_p.gif" alt="Plus Sign" style="display:visible" /><img src="images/pg_tree_m.gif" alt="Minus Sign" style="display:none" /></span>
 					<div class="PG_{$PLUGIN_NAME}_content">
@@ -83,7 +86,7 @@
 					</div>
 					<p><a href="" class="PG_{$PLUGIN_NAME}_more" style="display:none">more</a></p>
 				</li>
-			</ul>
+			</ul>-->
 		</div>
 	</div>
 	</div>

@@ -28,17 +28,64 @@ var defaults = { // Default values
 }
 
 var constructor = { // Initial functionalities
+  // Front
   initial_display: function()
   {
     var getter  = defaults.getter();
     var link    = $("ul.PG_"+PG_name()+"_nav li a.on ").attr("href");
-    var data    = "link="+link+"&init_display=1";
+    var trigger = "init_display";
+    
+    // Image loader
+    //var loader  = "<div id='PG_Yelp_ajaxloader'>";
+    //    loader += "<img src='"+defaults.basepath()+"/images/ajax-loader_yelp.gif'>";
+    //    loader += "</div>";
+        
+    //$("ul.PG_"+PG_name()+"_contentnews").hide();
+    //$("div#PG_"+PG_name()+"_ajaxloader").remove();
+    //$("div.PG_"+PG_name()+"_content_wrap").append(loader);
+    
     $.ajax({
       type: "POST",
       url: getter,
-      data: data,
+      data: { link: link, trigger: trigger},
+      dataType: "json",
       success: function(data){
-        alert(data);
+        var return_len = data["businesses"].length;
+        
+        var ul_ = "<ul class='PG_"+PG_name()+"_contentnews'>";
+            ul_ += "</ul>";
+        $("div.PG_"+PG_name()+"_content_wrap").append(ul_);
+        for(x=0;x<5;x++)
+        {
+          var html_ = "<li>";
+            html_ += "<span>";
+            html_ += "  <img src='"+defaults.basepath()+"/images/pg_tree_p.gif' alt='Plus Sign' style='display:visible' />";
+            html_ += "  <img src='"+defaults.basepath()+"/images/pg_tree_m.gif' alt='Minus Sign' style='display:none' />"
+            html_ += "</span>";
+			html_ += "<div class='PG_"+PG_name()+"_content'>";
+			html_ += "  <p class='PG_"+PG_name()+"_title'>"+data["businesses"][x]["name"]+"</p>";
+			html_ += "  <div class='PG_"+PG_name()+"_rating'>70 reviews</div>";
+			html_ += "  <ol id='PG_"+PG_name()+"_business-description'>"
+			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>San Francisco</li>";
+			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>Neighborhood:";
+            html_ += "  	  <a href='/search?cflt=restaurants&find_loc=SOMA%2C+San+Francisco%2C+CA'>SOMA</a>";
+            html_ += "  	</li>";
+			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>Categories:";
+            html_ += "  	  <a href='/c/sf/desserts'>Desserts</a>,<a href='/c/sf/gluten_free'>Gluten-Free</a>";
+            html_ += "  	</li>";
+			html_ += "  </ol>";
+			html_ += "  <p class='PG_"+PG_name()+"_toggle_content' style='display:none'>"	
+			html_ += "  	<a href='#'><img src='"+defaults.basepath()+"/images/pg_yelp_img1.jpg' alt='' /></a>";
+			html_ += "  	Problem #1: Out of beer after 11pm in fancy hotel downtown with no nearby open liquor stores.   Solution: TCB  Problem #2: Missed lunch at the SFGH caf and craving Rhea's. Solution: TCB  In both of the above instances, I was amazed by their fast friendly service and reasonable prices.  Tipping these guys is key- they are fast and work hard.  I'd recommend TCB for any of your random delivery needs...";
+			html_ += "  </p>";
+			html_ += "</div>";
+			html_ += "<p><a href='' class='PG_"+PG_name()+"_more' style='display:none'>more</a></p>";
+			html_ += "</li>";
+            
+          $("div#PG_"+PG_name()+"_ajaxloader").remove();
+          $("div.PG_"+PG_name()+"_content_wrap ul.PG_"+PG_name()+"_contentnews").append(html_);
+          $("#PG_Yelp_Front_mainContainer").append(data["businesses"][x]["name"]+"<br />");
+        }
       }
     });
   }

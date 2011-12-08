@@ -58,8 +58,7 @@
 		$smarty->assign("records_exist", "true");
 
 		// Checks if API Keys are valid
-		$response 	= $yelp_api->run($record_count,$yelp_api->def_generalUrl());
-		
+		$response 	= json_decode($yelp_api->run($record_count,$yelp_api->def_generalUrl()), true);
 		if(isset($response["error"]))
 		{
 			if($response["error"]["id"] == "INVALID_OAUTH_CREDENTIALS")

@@ -54,13 +54,14 @@
   }
   
   // Initial fron display
-  if(isset($_POST['init_display']))
+  if(isset($_POST['trigger']))
   {
-	$response = $yelp_api->run($record_count,$_POST['link']);
-	echo "<pre>";
-	print_r($response);
-	echo "</pre>";
-	//echo $_POST['link'];
+	echo $yelp_api->run($record_count,$_POST['link']);
+	//echo "<pre>";
+	//print_r($response);
+	//echo "</pre>";
+	//echo json_encode($response);
+	//echo $response;
   }
   
   

@@ -42,18 +42,21 @@
                 curl_close($ch);
                 
                 // Handle Yelp response data
-                $response           = json_decode($data, true);      
+                //return json_decode($data, true);
+                return $data;
             }
             else
             {
-                $response           = false;
+                return false;
             }
-            return $response;
         }
         
         public function def_generalUrl()
         {
-            $unsigned_url   = "http://api.yelp.com/v2/search?term=yelp&location=sf";
+            //$unsigned_url   = "http://api.yelp.com/v2/search?term=yelp&location=sf";
+            $unsigned_url   = "http://api.yelp.com/v2/search?category_filter=restaurants&location=sf";
+            //$unsigned_url   = "http://api.yelp.com/v2/business/yelp-san-francisco";
+            
             return $unsigned_url;
         }
     }
