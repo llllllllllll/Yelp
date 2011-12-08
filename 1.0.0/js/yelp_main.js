@@ -116,17 +116,18 @@ var constructor = { // Initial functionalities
               if(y == last_index)
               {
                 //If last neighbor, don't put a single comma at the end
-                category_title += data["businesses"][x]["categories"][y][0];
+                category_title += html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][y][1],data["businesses"][x]["categories"][y][0]);
               }
               else
               {
-                category_title += data["businesses"][x]["categories"][y][0]+", ";
+                category_title += html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][y][1],data["businesses"][x]["categories"][y][0])+", ";
               }
             }
           }
           else if(category_len == 1)
           {
-            var category_title = data["businesses"][x]["categories"][0][0];
+            var category_title = html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][0][1],data["businesses"][x]["categories"][0][0])+", ";
+            //var category_title = data["businesses"][x]["categories"][0][0];
           }
           else
           {
