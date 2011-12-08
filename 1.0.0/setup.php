@@ -61,9 +61,9 @@
 
 		// Checks if API Keys are valid
 		$response 	= json_decode($yelp_api->run($record_count,$yelp_api->def_generalUrl()), true);
-		echo "<pre>";
-		print_r($response);
-		echo "</pre>";
+		//echo "<pre>";
+		//print_r($response);
+		//echo "</pre>";
 		if(isset($response["error"]))
 		{
 			if($response["error"]["id"] == "INVALID_OAUTH_CREDENTIALS")

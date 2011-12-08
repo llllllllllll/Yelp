@@ -54,7 +54,7 @@
         public function def_generalUrl()
         {
             //$unsigned_url   = "http://api.yelp.com/v2/search?term=yelp&location=sf";
-            $unsigned_url   = "http://api.yelp.com/v2/search?category_filter=shopping&location=sf";
+            $unsigned_url   = "http://api.yelp.com/v2/search?category_filter=active&location=sf";
             //$unsigned_url   = "http://api.yelp.com/v2/business/yelp-san-francisco";
             
             return $unsigned_url;

@@ -59,6 +59,19 @@ var constructor = { // Initial functionalities
     var trigger = "init_display";
 
     Serverside.fetch_tab_results(link,trigger);
+  },
+  
+  template: function()
+  {
+    var template = $("#PG_"+PG_name()+"_template").val();
+    if(template == "blue")
+    {
+      $("#PG_"+PG_name()).addClass("PG_"+PG_name()+"_template_blue");
+    }
+    else
+    {
+      $("#PG_"+PG_name()).addClass("PG_"+PG_name()+"_template_gray");
+    }
   }
 }
 
@@ -194,53 +207,80 @@ var Serverside = { // Deals with server side applications
           var title_link    = html_helpers.h_link(title_url,title,"_blank","no_underline");
           // Review count
           var review_count  = data["businesses"][x]["review_count"];
+          
           // Neighborhood/s
-          var neighbor_len  = data["businesses"][x]["location"]["neighborhoods"].length;
-          if(neighbor_len > 1) // Counts if there are more than one neighbor
+          // Check first if "neighbor" attribute is existing in this
+          // list before extracting it or assigning to anything
+          if(typeof data["businesses"][x]["location"]["neighborhoods"] === 'undefined')
           {
-            var neighborhoods = "";
-            for(var z=0;z<neighbor_len;z++)
-            {
-              // If there are more than one, concatenate all the neighbors in one string
-              if(z != neighbor_len)
-                neighborhoods += html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][z]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][z])+", ";
-              else //If last neighbor, don't put a single comma at the end
-                neighborhoods += html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][z]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][z]);
-            }
+            var neighborhoods = "No neighbor";
           }
           else
           {
-            // Only one neighbor
-            var neighborhoods = html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][0]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][0]);
+            var neighbor_len  = data["businesses"][x]["location"]["neighborhoods"].length;
+          
+            if(neighbor_len > 1) // Counts if there are more than one neighbor
+            {
+              var neighborhoods = "";
+              for(var z=0;z<neighbor_len;z++)
+              {
+                // If there are more than one, concatenate all the neighbors in one string
+                if(z != neighbor_len)
+                  neighborhoods += html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][z]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][z])+", ";
+                else //If last neighbor, don't put a single comma at the end
+                  neighborhoods += html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][z]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][z]);
+              }
+            }
+            else if(neighbor_len == 1)
+            {
+              // Only one neighbor
+              var neighborhoods = html_helpers.h_link("http://www.yelp.com/search?cflt=restaurants&find_loc="+data["businesses"][x]["location"]["neighborhoods"][0]+"%2C+San+Francisco%2C+CA",data["businesses"][x]["location"]["neighborhoods"][0]);
+            }
+            else
+            {
+              // Only one neighbor
+              var neighborhoods = "No neighbor";
+            }
           }
+          
+          
           // Categories
-          var category_len  = data["businesses"][x]["categories"].length;
-          if(category_len > 1)
+          // Check first if "category" attribute is existing in this
+          // list before extracting it or assigning to anything
+          if(typeof data["businesses"][x]["categories"] === 'undefined')
           {
-            var category_title = "";
-            for(var y=0;y<category_len;y++)
-            {
-              // If there are more than one, concatenate all the neighbors in one string
-              var last_index = category_len - 1;
-              if(y == last_index)
-              {
-                //If last neighbor, don't put a single comma at the end
-                category_title += html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][y][1],data["businesses"][x]["categories"][y][0]);
-              }
-              else
-              {
-                category_title += html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][y][1],data["businesses"][x]["categories"][y][0])+", ";
-              }
-            }
-          }
-          else if(category_len == 1)
-          {
-            var category_title = html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][0][1],data["businesses"][x]["categories"][0][0])+", ";
-            //var category_title = data["businesses"][x]["categories"][0][0];
+            var category_title = " No category";
           }
           else
           {
-            var category_title = "No Categories";
+            var category_len  = data["businesses"][x]["categories"].length;
+            if(category_len > 1)
+            {
+              var category_title = "";
+              for(var y=0;y<category_len;y++)
+              {
+                // If there are more than one, concatenate all the neighbors in one string
+                var last_index = category_len - 1;
+                if(y == last_index)
+                {
+                  //If last neighbor, don't put a single comma at the end
+                  category_title += html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][y][1],data["businesses"][x]["categories"][y][0]);
+                }
+                else
+                {
+                  category_title += html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][y][1],data["businesses"][x]["categories"][y][0])+", ";
+                }
+              }
+            }
+            else if(category_len == 1)
+            {
+              var category_title = html_helpers.h_link("http://www.yelp.com/c/sf/"+data["businesses"][x]["categories"][0][1],data["businesses"][x]["categories"][0][0])+", ";
+              //var category_title = data["businesses"][x]["categories"][0][0];
+            }
+            else
+            {
+              var category_title = " No Categories";
+            }  
           }
           // Full content list
           var html_ = "<li>";
@@ -254,10 +294,10 @@ var Serverside = { // Deals with server side applications
 			html_ += "  <ol id='PG_"+PG_name()+"_business-description'>"
 			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>"+defaults.default_location()+"</li>";
 			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>Neighborhood:";
-            html_ += "  	  <a href='/search?cflt=restaurants&find_loc=SOMA%2C+San+Francisco%2C+CA'>"+neighborhoods+"</a>";
+            html_ +=          neighborhoods;
             html_ += "  	</li>";
 			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>Categories:";
-            html_ += "  	  <a href='/c/sf/desserts'>"+category_title+"</a>";
+            html_ +=          category_title;
             html_ += "  	</li>";
 			html_ += "  </ol>";
 			html_ += "  <p class='PG_"+PG_name()+"_toggle_content' style='display:none'>"	
@@ -300,7 +340,7 @@ jQuery(document).ready(function($){
   // Front ------------------------
   if($("div#PG_"+PG_name()+"_Front_mainContainer").length > 0)
   {
-    // Check if settings are set
+    // Check first if settings are set before doing anything
     if(defaults.records_exist() != "true")
     {
       $("ul.PG_"+PG_name()+"_nav").remove();
@@ -308,8 +348,11 @@ jQuery(document).ready(function($){
       $("div#PG_"+PG_name()).append("<span style='margin-top: 10px; display: block; text-align: center;'>Settings are not set yet.</span>");
     }
     
-    // Initial display
+    // Initial tab result display
     constructor.initial_display();
+    
+    // Template
+    constructor.template();
     
     // Tab
     $("ul.PG_Yelp_nav li a").click(function(){
