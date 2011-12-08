@@ -41,10 +41,11 @@ var html_helpers = {
     return data;
   },
   
-  h_link: function(url,text,target)
+  h_link: function(url,text,target,underline)
   {
     var f_target = target || '_blank';
-    var data = "<a href='"+url+"' target='"+f_target+"' class='no_underline'>"+text+"</a>";
+    var f_underline = underline || '';
+    var data = "<a href='"+url+"' target='"+f_target+"' class='"+f_underline+"'>"+text+"</a>";
     return data;
   }
 }
@@ -81,7 +82,7 @@ var constructor = { // Initial functionalities
           // Business title
           var title         = data["businesses"][x]["name"];
           var title_url     = data["businesses"][x]["url"];
-          var title_link    = html_helpers.h_link(title_url, title);
+          var title_link    = html_helpers.h_link(title_url,title,"_blank","no_underline");
           // Review count
           var review_count  = data["businesses"][x]["review_count"];
           // Neighborhood/s
