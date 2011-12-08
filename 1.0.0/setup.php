@@ -30,6 +30,8 @@
 	*/
 	if($yelp_api->run($record_count,$yelp_api->def_generalUrl()) != false)
 	{
+		$def_location = "San Francisco";
+		
 		// API Key table
 		$api_key_values = $db_admin->PG_Yelp_values("PG_Yelp_api_key");
 		foreach($api_key_values as $key=>$value)
@@ -59,6 +61,9 @@
 
 		// Checks if API Keys are valid
 		$response 	= json_decode($yelp_api->run($record_count,$yelp_api->def_generalUrl()), true);
+		echo "<pre>";
+		print_r($response);
+		echo "</pre>";
 		if(isset($response["error"]))
 		{
 			if($response["error"]["id"] == "INVALID_OAUTH_CREDENTIALS")
@@ -79,8 +84,11 @@
 		}
 		
 		// Default Categories
-		$default_categories	= $db_admin->default_categories();
+		$default_categories	= $db_admin->default_categories($def_location);
 		$smarty->assign("default_categories", $default_categories);
+		
+		// Default location
+		$smarty->assign("default_location", $def_location);
 	}
 	else
 	{

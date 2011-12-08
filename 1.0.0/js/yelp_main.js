@@ -24,6 +24,21 @@ var defaults = { // Default values
   {
     var records_exist = $("#PG_"+PG_name()+"_records_exist").val();
     return records_exist;
+  },
+  
+  default_location: function()
+  {
+    var default_location = $("#PG_"+PG_name()+"_def_location").val();
+    return default_location;
+  }
+}
+
+
+var html_helpers = {
+  h_img: function(url)
+  {
+    var data = "<img src='"+url+"' style='float:left;' />";
+    return data;
   }
 }
 
@@ -32,43 +47,66 @@ var constructor = { // Initial functionalities
   initial_display: function()
   {
     var getter  = defaults.getter();
+    // Default and first selected category upon page load
     var link    = $("ul.PG_"+PG_name()+"_nav li a.on ").attr("href");
     var trigger = "init_display";
-    
-    // Image loader
-    //var loader  = "<div id='PG_Yelp_ajaxloader'>";
-    //    loader += "<img src='"+defaults.basepath()+"/images/ajax-loader_yelp.gif'>";
-    //    loader += "</div>";
-        
-    //$("ul.PG_"+PG_name()+"_contentnews").hide();
-    //$("div#PG_"+PG_name()+"_ajaxloader").remove();
-    //$("div.PG_"+PG_name()+"_content_wrap").append(loader);
-    
+
     $.ajax({
       type: "POST",
       url: getter,
       data: { link: link, trigger: trigger},
       dataType: "json",
       success: function(data){
-        var return_len = data["businesses"].length;
-        
-        var ul_ = "<ul class='PG_"+PG_name()+"_contentnews'>";
-            ul_ += "</ul>";
+        // Result count
+        var return_len  = data["businesses"].length;
+        // Default number of rows displayed
+        var row_count   = 5;
+        // Creates a ul container for results list
+        var ul_         = "<ul class='PG_"+PG_name()+"_contentnews'>";
+            ul_         += "</ul>";
         $("div.PG_"+PG_name()+"_content_wrap").append(ul_);
-        for(x=0;x<5;x++)
+        
+        // Listing results
+        for(x=0;x<row_count;x++)
         {
+          // Image rating URL
+          var img_rating    = html_helpers.h_img(data["businesses"][x]["rating_img_url"]);
+          // Business title
+          var title         = data["businesses"][x]["name"];
+          // Review count
+          var review_count  = data["businesses"][x]["review_count"];
+          // Neighborhood/s
+          var neighbor_len  = data["businesses"][x]["location"]["neighborhoods"].length;
+          if(neighbor_len > 1) // Counts if there are more than one neighbor
+          {
+            var neighborhoods = "";
+            for(x=0;x<neighbor_len;x++)
+            {
+              // If there are more than one, concatenate all the neighbors in one string
+              if(x != neighbor_len)
+                neighborhoods += data["businesses"][x]["location"]["neighborhoods"][x]+", ";
+              else //If last neighbor, don't put a single comma at the end
+                neighborhoods += data["businesses"][x]["location"]["neighborhoods"][x];
+            }
+          }
+          else
+          {
+            // Only one neighbor
+            var neighborhoods = data["businesses"][x]["location"]["neighborhoods"][0];
+          }
+          // Full content list
           var html_ = "<li>";
             html_ += "<span>";
             html_ += "  <img src='"+defaults.basepath()+"/images/pg_tree_p.gif' alt='Plus Sign' style='display:visible' />";
             html_ += "  <img src='"+defaults.basepath()+"/images/pg_tree_m.gif' alt='Minus Sign' style='display:none' />"
             html_ += "</span>";
 			html_ += "<div class='PG_"+PG_name()+"_content'>";
-			html_ += "  <p class='PG_"+PG_name()+"_title'>"+data["businesses"][x]["name"]+"</p>";
-			html_ += "  <div class='PG_"+PG_name()+"_rating'>70 reviews</div>";
+			html_ += "  <p class='PG_"+PG_name()+"_title'>"+title+"</p>";
+			html_ += "  <div class='PG_"+PG_name()+"_rating'>"+img_rating+" <span style='float:left;margin:3px 0 0 5px'>"+review_count+" reviews</span></div>";
 			html_ += "  <ol id='PG_"+PG_name()+"_business-description'>"
-			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>San Francisco</li>";
+			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>"+defaults.default_location()+"</li>";
 			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>Neighborhood:";
-            html_ += "  	  <a href='/search?cflt=restaurants&find_loc=SOMA%2C+San+Francisco%2C+CA'>SOMA</a>";
+            html_ += "  	  <a href='/search?cflt=restaurants&find_loc=SOMA%2C+San+Francisco%2C+CA'>"+neighborhoods+"</a>";
             html_ += "  	</li>";
 			html_ += "  	<li class='PG_"+PG_name()+"_content_desc'>Categories:";
             html_ += "  	  <a href='/c/sf/desserts'>Desserts</a>,<a href='/c/sf/gluten_free'>Gluten-Free</a>";
@@ -81,8 +119,9 @@ var constructor = { // Initial functionalities
 			html_ += "</div>";
 			html_ += "<p><a href='' class='PG_"+PG_name()+"_more' style='display:none'>more</a></p>";
 			html_ += "</li>";
-            
+          // Remove the image loader
           $("div#PG_"+PG_name()+"_ajaxloader").remove();
+          // Replace the image loader by the results
           $("div.PG_"+PG_name()+"_content_wrap ul.PG_"+PG_name()+"_contentnews").append(html_);
           $("#PG_Yelp_Front_mainContainer").append(data["businesses"][x]["name"]+"<br />");
         }

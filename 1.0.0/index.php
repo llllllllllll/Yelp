@@ -30,6 +30,7 @@
 	*/
 	if($yelp_api->run($record_count,$yelp_api->def_generalUrl()) != false)
 	{
+		$def_location = "San Francisco";
 		// Yelp option table
 		$option_values = $db_admin->PG_Yelp_values("PG_Yelp_option");
 		foreach($option_values as $key=>$value)
@@ -43,7 +44,7 @@
 		$category 		= $option_values["category"];
 		$slice_ctgry = explode(",", $category);
 		// Get the link of each category
-		$ctgry_list = $db_admin->categories();
+		$ctgry_list = $db_admin->categories($def_location);
 		for($x=0;$x<$total_category;$x++)
 		{
 			$smarty->assign("ctrgy_".$x, $slice_ctgry[$x]);
@@ -74,8 +75,11 @@
 		}
 		
 		// Default Categories
-		$default_categories	= $db_admin->default_categories();
+		$default_categories	= $db_admin->default_categories($def_location);
 		$smarty->assign("default_categories", $default_categories);
+		
+		// Default location
+		$smarty->assign("default_location", $def_location);
 	}
 	else
 	{

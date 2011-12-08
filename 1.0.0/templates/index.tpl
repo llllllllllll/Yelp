@@ -94,5 +94,6 @@
 	<input type="hidden" name="PG_{$PLUGIN_NAME}_getter" id="PG_{$PLUGIN_NAME}_getter" value="{$getterPhp}" />
 	<input type="hidden" name="PG_{$PLUGIN_NAME}_basepath" id="PG_{$PLUGIN_NAME}_basepath" value="{$PG_BASE_PATH}" />
 	<input type="hidden" name="PG_{$PLUGIN_NAME}_records_exist" id="PG_{$PLUGIN_NAME}_records_exist" value="{$records_exist}" />
+	<input type="hidden" name="PG_{$PLUGIN_NAME}_def_location" id="PG_{$PLUGIN_NAME}_def_location" value="{$default_location}" />
 </body>
 </html>

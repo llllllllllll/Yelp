@@ -46,9 +46,9 @@
 	  }
 	  //------- end
 	  
-	  public function default_categories()
+	  public function default_categories($loc)
 	  {
-			$init_categories 	= $this->categories();
+			$init_categories 	= $this->categories($loc);
 			$default_row_count	= count($init_categories);
 			$counter 			= 1;
 			$categories			= "";
@@ -88,9 +88,9 @@
 	  }
 	  
 	  // Insert option values
-	  public function insert_newoptions()
+	  public function insert_newoptions($loc)
 	  {
-			$init_categories 	= $this->categories();
+			$init_categories 	= $this->categories($loc);
 			$default_row_count	= count($init_categories);
 			$default_categories	= $this->default_categories();
 			
@@ -127,30 +127,31 @@
 	  }
 	  
 	  // Categories
-	  public function categories()
+	  public function categories($loc)
 	  {
-			$cat_array = array(
-				"Restaurants"					=> "http://api.yelp.com/v2/search?category_filter=restaurants&location=sf",
-				"Food"							=> "http://api.yelp.com/v2/search?category_filter=food&location=sf",
-				"Nightlife"						=> "http://api.yelp.com/v2/search?category_filter=nightlife&location=sf",
-				"Shopping"						=> "http://api.yelp.com/v2/search?category_filter=shopping&location=sf",
-				"Beauty and Spas"				=> "http://api.yelp.com/v2/search?category_filter=beautysvc&location=sf",
-				"Arts and Entertainment"		=> "http://api.yelp.com/v2/search?category_filter=arts&location=sf",
-				"Event Planning and Services"	=> "http://api.yelp.com/v2/search?category_filter=eventservices&location=sf",
-				"Active Life"					=> "http://api.yelp.com/v2/search?category_filter=active&location=sf",
-				"Health and Medical"			=> "http://api.yelp.com/v2/search?category_filter=health&location=sf",
-				"Hotels and Travel"				=> "http://api.yelp.com/v2/search?category_filter=hotelstravel&location=sf",
-				"Local Services"				=> "http://api.yelp.com/v2/search?category_filter=localservices&location=sf",
-				"Home Services"					=> "http://api.yelp.com/v2/search?category_filter=homeservices&location=sf",
-				"Automotive"					=> "http://api.yelp.com/v2/search?category_filter=auto&location=sf",
-				"Local Flavor"					=> "http://api.yelp.com/v2/search?category_filter=localflavor&location=sf",
-				"Pets"							=> "http://api.yelp.com/v2/search?category_filter=pets&location=sf",
-				"Public Services and Education"	=> "http://api.yelp.com/v2/search?category_filter=publicservicesgovt&location=sf",
-				"Professional Services"			=> "http://api.yelp.com/v2/search?category_filter=professional&location=sf",
-				"Real Estate"					=> "http://api.yelp.com/v2/search?category_filter=realestate&location=sf",
-				"Mass Media"					=> "http://api.yelp.com/v2/search?category_filter=massmedia&location=sf",
-				"Financial Services"			=> "http://api.yelp.com/v2/search?category_filter=financialservices&location=sf",
-				"Religious Organizations"		=> "http://api.yelp.com/v2/search?category_filter=religiousorgs&location=sf"
+			$location 	= $loc;
+			$cat_array 	= array(
+				"Restaurants"					=> "http://api.yelp.com/v2/search?category_filter=restaurants&location=".$location,
+				"Food"							=> "http://api.yelp.com/v2/search?category_filter=food&location=".$location,
+				"Nightlife"						=> "http://api.yelp.com/v2/search?category_filter=nightlife&location=".$location,
+				"Shopping"						=> "http://api.yelp.com/v2/search?category_filter=shopping&location=".$location,
+				"Beauty and Spas"				=> "http://api.yelp.com/v2/search?category_filter=beautysvc&location=".$location,
+				"Arts and Entertainment"		=> "http://api.yelp.com/v2/search?category_filter=arts&location=".$location,
+				"Event Planning and Services"	=> "http://api.yelp.com/v2/search?category_filter=eventservices&location=".$location,
+				"Active Life"					=> "http://api.yelp.com/v2/search?category_filter=active&location=".$location,
+				"Health and Medical"			=> "http://api.yelp.com/v2/search?category_filter=health&location=".$location,
+				"Hotels and Travel"				=> "http://api.yelp.com/v2/search?category_filter=hotelstravel&location=".$location,
+				"Local Services"				=> "http://api.yelp.com/v2/search?category_filter=localservices&location=".$location,
+				"Home Services"					=> "http://api.yelp.com/v2/search?category_filter=homeservices&location=".$location,
+				"Automotive"					=> "http://api.yelp.com/v2/search?category_filter=auto&location=".$location,
+				"Local Flavor"					=> "http://api.yelp.com/v2/search?category_filter=localflavor&location=".$location,
+				"Pets"							=> "http://api.yelp.com/v2/search?category_filter=pets&location=".$location,
+				"Public Services and Education"	=> "http://api.yelp.com/v2/search?category_filter=publicservicesgovt&location=".$location,
+				"Professional Services"			=> "http://api.yelp.com/v2/search?category_filter=professional&location=".$location,
+				"Real Estate"					=> "http://api.yelp.com/v2/search?category_filter=realestate&location=".$location,
+				"Mass Media"					=> "http://api.yelp.com/v2/search?category_filter=massmedia&location=".$location,
+				"Financial Services"			=> "http://api.yelp.com/v2/search?category_filter=financialservices&location=".$location,
+				"Religious Organizations"		=> "http://api.yelp.com/v2/search?category_filter=religiousorgs&location=".$location
 			);
 			return $cat_array;
 	  }
