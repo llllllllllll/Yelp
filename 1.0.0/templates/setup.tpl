@@ -1,6 +1,6 @@
 {include file='header.tpl'}
 <body>
-{$sScriptCrossDomain}
+<!--{$sScriptCrossDomain}-->
 	<div id="PG_{$PLUGIN_NAME}_Setup_mainContainer">
 	<!-- message box -->
 	<div id="PG_{$PLUGIN_NAME}_successMsg"></div>	

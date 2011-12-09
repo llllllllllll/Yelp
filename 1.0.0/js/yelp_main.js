@@ -78,13 +78,20 @@ var constructor = { // Initial functionalities
 var validation = { // Validations
   txt_required: function(tbl_id)
   {
+    // [WARNING]:
+    // This validation only works to a single textbox
+    // inside a td, inside the tr inside the table
     var total_tr    = $("table#"+tbl_id+" tr").length;
     var err_storage = new Array();
+
     for(x=0;x<total_tr;x++)
     {
+      // Greater than zero because there's already
+      // a tr above the textbox in apis for errors
       if(x>0)
       {
         var id  = $("table#"+tbl_id+" tr:eq("+x+") td input[type=text]").attr("id");
+        //alert(id);
         var vals = $.trim($("#"+id).val());
         if(vals == "" || vals == "Required")
         {
