@@ -76,17 +76,36 @@ var constructor = { // Initial functionalities
 }
 
 var validation = { // Validations
-  required: function(element_val)
+  txt_required: function(tbl_id)
   {
-    if(element_val == "")
+    var total_tr    = $("table#"+tbl_id+" tr").length;
+    var err_storage = new Array();
+    for(x=0;x<total_tr;x++)
     {
-      $msg = false;
+      if(x>0)
+      {
+        var id  = $("table#"+tbl_id+" tr:eq("+x+") td input[type=text]").attr("id");
+        var vals = $.trim($("#"+id).val());
+        if(vals == "" || vals == "Required")
+        {
+          var err_msg = validation.message("required");
+          $("#"+id).addClass("error");
+          $("#"+id).val("Required");
+          err_storage += "1,";
+        }
+      }
+    }
+    
+    var err_len = err_storage.length;
+    if(err_len == 0)
+    {
+      var result = true
     }
     else
     {
-      $msg = true;
+      var result = false;
     }
-    return $msg;
+    return result;
   },
   
   message: function(msg)
@@ -407,33 +426,14 @@ jQuery(document).ready(function($){
     api_keys["token"]           = api_token;
     api_keys["token_secret"]    = api_token_secret;
     
-    // Validate API Keys
-    var api_keys_arr_validation = new Array(api_consumer_key,api_consumer_secret);
+    // Textbox validations
+    var apikeys_valid   = validation.txt_required("PG_"+PG_name()+"_APIs");
+    var otherTbl_valid  = validation.txt_required("PG_"+PG_name()+"_otherTbl");
     
-    // API Validation/required
-    var total_tr    = $("table#PG_Yelp_APIs tr").length;
-    var err_storage = new Array();
-    for(x=0;x<total_tr;x++)
-    {
-      if(x>0)
-      {
-        var id  = $("table#PG_Yelp_APIs tr:eq("+x+") td input[type=text]").attr("id");
-        var vals = $.trim($("#"+id).val());
-        if(vals == "" || vals == "Required")
-        {
-          var err_msg = validation.message("required");
-          $("#"+id).addClass("error");
-          $("#"+id).val("Required");
-          err_storage += "1,";
-        }
-      }
-    }
-    
-    var err_len = err_storage.length;
-    if(err_len == 0)
+    if((apikeys_valid && otherTbl_valid) == true)
     {
       // Save API Keys
-      Serverside.save(api_keys);  
+      Serverside.save(api_keys);
     }
     
     // Prevent page from refreshing
