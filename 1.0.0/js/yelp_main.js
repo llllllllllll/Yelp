@@ -91,14 +91,17 @@ var validation = { // Validations
       if(x>0)
       {
         var id  = $("table#"+tbl_id+" tr:eq("+x+") td input[type=text]").attr("id");
-        //alert(id);
-        var vals = $.trim($("#"+id).val());
-        if(vals == "" || vals == "Required")
+        if(typeof id !== 'undefined')
         {
-          var err_msg = validation.message("required");
-          $("#"+id).addClass("error");
-          $("#"+id).val("Required");
-          err_storage += "1,";
+            var vals = $.trim($("#"+id).val());
+
+            if(vals == "" || vals == "Required")
+            {
+              var err_msg = validation.message("required");
+              $("#"+id).addClass("error");
+              $("#"+id).val("Required");
+              err_storage += "1,";
+            }
         }
       }
     }
