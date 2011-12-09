@@ -127,8 +127,7 @@ var Serverside = { // Deals with server side applications
         var catgry_vals = $("#show_html_value option:nth-child("+x+")").val();
         catgry_arr["catgry_"+x]    = catgry_vals;
       }
-      // Get the default category
-      var def_catgry    = $("input[name=PG_"+PG_name()+"_def_category]:checked").val();
+      
       // Get the default rows
       var def_rows      = $("#PG_"+PG_name()+"_rows").val();
       // Get the default template
@@ -140,7 +139,7 @@ var Serverside = { // Deals with server side applications
           data    += "token="+api_keys["token"]+"&";
           data    += "token_secret="+api_keys["token_secret"]+"&";
       // Default categories
-          data    += "default_category="+def_catgry+"&";
+          data    += "default_category=general&";
       // Categories
       for(x=1;x<=catgry_len;x++)
       {
@@ -419,7 +418,7 @@ jQuery(document).ready(function($){
       if(x>0)
       {
         var id  = $("table#PG_Yelp_APIs tr:eq("+x+") td input[type=text]").attr("id");
-        var vals = $("#"+id).val();
+        var vals = $.trim($("#"+id).val());
         if(vals == "" || vals == "Required")
         {
           var err_msg = validation.message("required");

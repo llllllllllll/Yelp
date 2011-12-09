@@ -45,13 +45,6 @@
 				<col width="*" />
 			</colgroup>
 			<tr>
-				<th><label for="show_html_value">Default Categories</label></th>
-				<td>
-					<input type="radio" class="fix input_rdo" id="PG_{$PLUGIN_NAME}_def_general" name="PG_{$PLUGIN_NAME}_def_category" value="general" {if $default_category eq 'general'}checked="checked"{/if} />General<br />
-					<input type="radio" class="fix input_rdo" id="PG_{$PLUGIN_NAME}_def_specific" name="PG_{$PLUGIN_NAME}_def_category" value="specific" {if $default_category eq 'specific'}checked="checked"{/if} />Specific	
-				</td>
-			</tr>
-			<tr>
 				<th>Category</th>
 				<td class="PG_{$PLUGIN_NAME}_move">
 					<p><a href="#"><img class="PG_{$PLUGIN_NAME}_move" src="images/u131_original.png" alt="Up" /></a><a href="#"><img class="PG_{$PLUGIN_NAME}_move" src="images/u137_original.png" alt="Down" /></a></p>
