@@ -155,6 +155,7 @@ var Serverside = { // Deals with server side applications
           data    += "save_type=update";
     }
     var getter  = defaults.getter();
+    
     $.ajax({
         type: "POST",
         url: getter,
@@ -181,12 +182,12 @@ var Serverside = { // Deals with server side applications
   
   fetch_tab_results: function(i_link, i_trigger)
   {
-    $.ajax({
-      type: "POST",
-      url: defaults.getter(),
-      data: { link: i_link, trigger: i_link},
-      dataType: "json",
-      success: function(data){
+    var pNode = $("#PG_"+PG_name()+"_body");		
+	var mData = { url : defaults.getter(),
+                  link: i_link,
+                  trigger: i_trigger
+                }		
+    PLUGIN.post(pNode, mData , 'custom' , 'json', function (data){
         // Result count
         var return_len  = data["businesses"].length;
         // Default number of rows displayed
@@ -242,7 +243,6 @@ var Serverside = { // Deals with server side applications
               var neighborhoods = "No neighbor";
             }
           }
-          
           
           // Categories
           // Check first if "category" attribute is existing in this
@@ -313,8 +313,7 @@ var Serverside = { // Deals with server side applications
           $("div.PG_"+PG_name()+"_content_wrap ul.PG_"+PG_name()+"_contentnews").append(html_);
           //$("#PG_Yelp_Front_mainContainer").append(data["businesses"][x]["name"]+"<br />");
         }
-      }
-    });
+	});
   },
   
   tabs: function(_link)

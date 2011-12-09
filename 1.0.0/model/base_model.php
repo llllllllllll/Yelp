@@ -11,7 +11,8 @@
 	  protected $tbl_option 	= "PG_Yelp_option";
 	  protected $tbl_main 		= "PG_Yelp_main";
 	  protected $tbl_api_key 	= "PG_Yelp_api_key";
-		
+	  protected $def_location 	= "San Francisco";
+	  
 	  /*
 	  | --------------------
 	  | Plugin user ID
@@ -84,7 +85,7 @@
 			$values = $this->query($sSql);
 			
 			// Automatically insert default values for options
-			$this->insert_newoptions();
+			$this->insert_newoptions($this->def_location);
 	  }
 	  
 	  // Insert option values
@@ -92,7 +93,7 @@
 	  {
 			$init_categories 	= $this->categories($loc);
 			$default_row_count	= count($init_categories);
-			$default_categories	= $this->default_categories();
+			$default_categories	= $this->default_categories($loc);
 			
 			$sSql = "INSERT INTO ".$this->tbl_option."
 				  (pdm_idx,default_category,category,total_category,show_rows,template)

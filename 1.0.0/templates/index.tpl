@@ -1,5 +1,5 @@
 {include file='header.tpl'}
-<body>
+<body id="PG_{$PLUGIN_NAME}_body">
 	<div id="PG_{$PLUGIN_NAME}_Front_mainContainer">
 	<div id="PG_{$PLUGIN_NAME}">
 		<h1>Yelp</h1>
